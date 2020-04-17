@@ -20,15 +20,18 @@ import android.view.MenuItem;
 
 import android.view.View;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 
 import com.google.android.material.navigation.NavigationView;
-
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class MainActivity extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final int LOGIN_REQUEST = 101;
 
     DrawerLayout drawerLayout;
 
@@ -47,6 +50,9 @@ public class MainActivity extends AppCompatActivity   implements NavigationView.
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+               Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
+        startActivityForResult(launchLogin, LOGIN_REQUEST);
 
 
 
@@ -86,7 +92,23 @@ public class MainActivity extends AppCompatActivity   implements NavigationView.
 
     }
 
+    @Override
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent getCredentials) {
+        super.onActivityResult(requestCode, resultCode, getCredentials);
+        if (requestCode == LOGIN_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String nome = getCredentials.getExtras().getString("nome");
+                String cognome = getCredentials.getExtras().getString("cognome");
+                String email = getCredentials.getExtras().getString("email");
+
+                TextView slotNomeCognome = (TextView) findViewById(R.id.slotNomeCognome);
+                slotNomeCognome.setText(nome + " " + cognome);
+                TextView slotEmail = (TextView) findViewById(R.id.slotEmail);
+                slotEmail.setText(email);
+            }
+        }
+    }
 
 
 
