@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "703656558314",
+    "firebase_url": "https://futsapp-b520f.firebaseio.com",
+    "project_id": "futsapp-b520f",
+    "storage_bucket": "futsapp-b520f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703656558314:android:9f5bae640ffcdc9966e193",
+        "android_client_info": {
+          "package_name": "com.univpm.futsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703656558314-6fdrj6scecf3lp7k3d9p970f98j1b09g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.univpm.futsapp",
+            "certificate_hash": "1444c203d69d74d1c0e9d64d4987e3f86cd2b696"
+          }
+        },
+        {
+          "client_id": "703656558314-1hiqd9l7p187e6il784e8f8q1bhlcg5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArul72XWT3mLfDBlKhANVL9YChuqtBsXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703656558314-1hiqd9l7p187e6il784e8f8q1bhlcg5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,4 +2,9 @@
     <string name="app_name">FutsApp</string>
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
+    <string name="nome">nome</string>
+    <string name="cognome">cognome</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="registrati">registrati</string>
 </resources>
