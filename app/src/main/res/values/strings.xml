@@ -6,5 +6,5 @@
     <string name="cognome">cognome</string>
     <string name="email">email</string>
     <string name="password">password</string>
-    <string name="registrati">registrati</string>
+    <string name="login">login</string>
 </resources>

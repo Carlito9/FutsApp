@@ -22,26 +22,29 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="14dp"
         app:civ_border_color="@color/colorAccent"/>
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Momo"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="14dp"
-        android:textColor="#fff"
-        android:textStyle="bold"/>
-     <TextView
+
+        <TextView
+            android:id="@+id/slotNomeCognome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="momo@hotmail.it"
-            android:textSize="20dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="14dp"
+            android:layout_marginTop="10dp"
+            android:text="Momo"
             android:textColor="#fff"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/slotEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
