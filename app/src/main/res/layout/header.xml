@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/c3"
     android:layout_width="match_parent"
     android:layout_height="250dp">
     
-    <LinearLayout
+
         android:layout_width="match_parent"
         android:gravity="bottom"
         android:orientation="vertical"
@@ -23,15 +24,16 @@
         android:layout_marginLeft="14dp"
         app:civ_border_color="@color/colorAccent"/>
 
+
         <TextView
-            android:id="@+id/slotNomeCognome"
+            android:id="@+id/slotUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
-            android:text="Momo"
             android:textColor="#fff"
+            android:text=""
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -43,10 +45,11 @@
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
             android:textColor="#fff"
+            android:text=""
             android:textSize="20dp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+
 
 
 </LinearLayout>
