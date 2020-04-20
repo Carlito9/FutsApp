@@ -1,19 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-
-    
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewGameActivity">
-    <TextView
-        android:layout_width="wrap_content"
+    android:orientation="vertical"
+    tools:context=".NewGameActivity"
+    android:padding="20dp">
+
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NewGame"
-        android:textSize="50dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentTop="true"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:id="@+id/Name"
+        android:hint="Nome Partita"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Name"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:hint="Luogo"
+        android:id="@+id/Luogo"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Costo"
+        android:textAlignment="textEnd"
+        android:textSize="35dp"
+        android:hint="Data"
+        android:textColor="@color/c3"
+        android:id="@+id/Data"
+        android:inputType="date"/>
+
+    <TimePicker
+        android:id="@+id/Orario"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_conferma"
+        android:layout_below="@+id/Data"
+        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="8dp"
+        android:numbersSelectorColor="@color/c3"
+        android:timePickerMode="spinner" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Luogo"
+        android:textSize="30dp"
+        android:hint="Costo"
+        android:textAlignment="center"
+        android:id="@+id/Costo"
+        android:inputType="number"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Euro"
+        android:textSize="35dp"
+        android:textColor="@color/c3"
+        android:textAlignment="textEnd"
+        android:layout_below="@+id/Luogo"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="conferma"
+        android:id="@+id/btn_conferma"
+        android:background="@color/colorAccent"
+        android:layout_above="@+id/goback"
+        android:textColor="@android:color/white"/>
+    <Button
+        android:id="@+id/goback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Indietro"        />
 
 </RelativeLayout>
