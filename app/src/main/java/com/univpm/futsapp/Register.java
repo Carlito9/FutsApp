@@ -62,8 +62,6 @@ public class Register extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         InsertUser(username, user.getUid());
                                         Intent intent = new Intent();
-                                        intent.putExtra("username", textUser.getText().toString());
-                                        intent.putExtra("email", textEmail.getText().toString());
                                         setResult(RESULT_OK, intent);
                                         finish();
                                     }

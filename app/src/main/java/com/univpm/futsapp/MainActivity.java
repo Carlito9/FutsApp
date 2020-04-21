@@ -27,28 +27,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity{
 
     public static final int LOGIN_REQUEST = 101;
     private FirebaseAuth mAuth;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
+    View headerView;
     ActionBarDrawerToggle toogle;
-    String username, email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
-
-
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
-        if(true){//preferences.getBoolean("firstrun", true)) {
-            Intent launchLogin = new Intent(MainActivity.this, Register.class);
+        headerView = navigationView.getHeaderView(0);
+        if(preferences.getBoolean("firstrun", true)) {
+            Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(launchLogin, LOGIN_REQUEST);
         }
         else{
@@ -61,13 +61,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toogle);
         toogle.syncState();
 
-        ButtonHandler bh = new ButtonHandler();
+        Navigator nav = new Navigator();
 
-        findViewById(R.id.bGruppi).setOnClickListener(bh);
-        findViewById(R.id.bStorico).setOnClickListener(bh);
-        findViewById(R.id.bIdeeFuture).setOnClickListener(bh);
-        findViewById(R.id.bNuovaPartita).setOnClickListener(bh);
-        findViewById(R.id.bProssimoEvento).setOnClickListener(bh);
+
+        findViewById(R.id.bGruppi).setOnClickListener(nav);
+        findViewById(R.id.bStorico).setOnClickListener(nav);
+        findViewById(R.id.bIdeeFuture).setOnClickListener(nav);
+        findViewById(R.id.bNuovaPartita).setOnClickListener(nav);
+        findViewById(R.id.bProssimoEvento).setOnClickListener(nav);
+
+
+
     }
 
     @Override
@@ -75,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, getCredentials);
         if (requestCode == LOGIN_REQUEST) {
             if (resultCode == RESULT_OK) {
-                username=getCredentials.getExtras().getString("username");
-                email=getCredentials.getExtras().getString("email");
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstrun", false);
@@ -89,13 +91,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-
+        String username, email;
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         username =currentUser.getDisplayName();
         email =currentUser.getEmail();
-        navigationView = findViewById(R.id.navigationView);
-        View headerView = navigationView.getHeaderView(0);
         TextView slotUsername = (TextView) headerView.findViewById(R.id.slotUsername);
         slotUsername.setText(username);
         TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
@@ -103,8 +103,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+
+
+
+    public void onNavigationItemSelected (@NonNull MenuItem menuItem){
         switch (menuItem.getItemId()) {
             case R.id.profile:
                 Toast.makeText(MainActivity.this, "Profile Selected", Toast.LENGTH_LONG).show();
@@ -115,20 +118,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.about:
                 Toast.makeText(MainActivity.this, "About us Selected", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.logout:
-            {Intent launchLogin = new Intent(MainActivity.this, Register.class);
+            case R.id.logout: {
+                Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
                 startActivityForResult(launchLogin, LOGIN_REQUEST);
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstrun", true);
                 editor.apply();
             }
-                break;
+            break;
         }
-        return false;
+
     }
 
-    private class ButtonHandler implements View.OnClickListener {
+
+
+
+    private class Navigator implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
