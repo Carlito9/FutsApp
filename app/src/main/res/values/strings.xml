@@ -9,4 +9,8 @@
     <string name="login">login</string>
     <string name="username">username</string>
     <string name="registrati">registrati</string>
+    <string name="title_activity_social">SocialActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
