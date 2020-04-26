@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -60,7 +59,7 @@ public class Register extends AppCompatActivity {
                                 user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        InsertUser(username, user.getUid());
+                                        InsertUser(username);
                                         Intent intent = new Intent();
                                         setResult(RESULT_OK, intent);
                                         finish();
@@ -81,7 +80,7 @@ public class Register extends AppCompatActivity {
         });
 
     }
-    private void InsertUser(String username, String uid) {
+    private void InsertUser(String username) {
         Map<String, Object> user = new HashMap<>();
         user.put("username", username);
         user.put("partite giocate",0);
@@ -94,6 +93,7 @@ public class Register extends AppCompatActivity {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("utenti").document(uid).set(user);
+        db.collection("utenti").document(username).set(user);
+
     }
 }

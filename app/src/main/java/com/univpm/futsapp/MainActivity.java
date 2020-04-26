@@ -25,6 +25,9 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity{
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
         if(preferences.getBoolean("firstrun", true)) {
+            onResume();
             Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(launchLogin, LOGIN_REQUEST);
         }
@@ -70,8 +74,8 @@ public class MainActivity extends AppCompatActivity{
         findViewById(R.id.bNuovaPartita).setOnClickListener(nav);
         findViewById(R.id.bProssimoEvento).setOnClickListener(nav);
 
-
-
+//funzione che genera database NON TOGLIERE COMMENTO, RESETTA IL DATABASE!!!
+       //generaData.generare("2020");
     }
 
     @Override
@@ -91,6 +95,8 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        Map<String,Object> prova;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String username, email;
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -100,7 +106,8 @@ public class MainActivity extends AppCompatActivity{
         slotUsername.setText(username);
         TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
         slotEmail.setText(email);
-
+        //prova= (Map<String, Object>) db.collection("users").document(currentUser.getUid()).get();
+        //System.out.println(prova.get("username"));
     }
 
 
@@ -117,6 +124,7 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.about:
                 Toast.makeText(MainActivity.this, "About us Selected", Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.logout: {
                 Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity{
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstrun", true);
                 editor.apply();
+                finish();
             }
             break;
         }
