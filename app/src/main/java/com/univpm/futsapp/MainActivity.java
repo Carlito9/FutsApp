@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity{
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
         if(preferences.getBoolean("firstrun", true)) {
-            onResume();
             Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(launchLogin, LOGIN_REQUEST);
+
         }
         else{
            onResume();

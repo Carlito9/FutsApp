@@ -17,6 +17,7 @@ class generaData {
         db= FirebaseFirestore.getInstance();
         Map<String,Object> date=new HashMap<>();
         date.put("anno",anno);
+
         db.collection("partite").document(anno).set(date);
         DocumentReference ref;
         date.remove("anno");
