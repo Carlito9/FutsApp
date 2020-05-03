@@ -54,6 +54,7 @@
         android:id="@+id/bProssimoEvento"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/football"
         android:text="Prossimo evento"
         app:layout_constraintBottom_toTopOf="@+id/bGruppi"
         app:layout_constraintEnd_toEndOf="parent"

@@ -96,18 +96,6 @@ public class MainActivity extends AppCompatActivity {
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toogle);
         toogle.syncState();
-
-        //Navigator nav = new Navigator();
-
-/*
-        findViewById(R.id.bGruppi).setOnClickListener(nav);
-        findViewById(R.id.bStorico).setOnClickListener(nav);
-        findViewById(R.id.bIdeeFuture).setOnClickListener(nav);
-        findViewById(R.id.bNuovaPartita).setOnClickListener(nav);
-        findViewById(R.id.bProssimoEvento).setOnClickListener(nav);*/
-
-//funzione che genera database NON TOGLIERE COMMENTO, RESETTA IL DATABASE!!!
-        //generaData.generare("2020");
     }
 
     @Override
@@ -166,48 +154,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-
-  /*  private class Navigator implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.bGruppi:
-                    show("visualizzo i gruppi");
-                    break;
-                case R.id.bStorico:
-                    show("visualizzo lo storico");
-                    break;
-                case R.id.bIdeeFuture:
-                    show("open social");
-                                        break;
-                case R.id.bNuovaPartita:
-                    show("creiamo una nuova partita");
-                    openNewGame();
-                    break;
-                case R.id.bProssimoEvento:
-                    show("il prossimo evento è...");
-                    break;
-                default:
-                    show("non dovrebbe succedere");
-            }
-
-        }
-
-    }*/
-/*
-public void openNewGame(){
-    Intent intent = new Intent(this,NewGameActivity.class);
-    startActivity(intent);
-    }
-
-void show(String s) {
-
-        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
-    }
-
-}*/
 }
