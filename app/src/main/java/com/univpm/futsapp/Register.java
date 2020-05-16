@@ -67,7 +67,7 @@ public class Register extends AppCompatActivity {
                                 });
                             }else
                             {
-                                Toast.makeText(Register.this,"Vafamocc a sort",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this,"Fallito",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

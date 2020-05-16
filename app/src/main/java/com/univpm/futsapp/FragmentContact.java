@@ -16,3 +16,4 @@ public class FragmentContact extends Fragment {
         return inflater.inflate(R.layout.fragment_contact,container,false);
     }
 }
+
