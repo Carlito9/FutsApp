@@ -133,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
 @Override
     protected void onResume() {
         super.onResume();
-        Map<String, Object> prova;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String username, email;
         mAuth = FirebaseAuth.getInstance();
