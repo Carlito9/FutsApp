@@ -67,6 +67,7 @@ public class ListaDoppiaGiocatori extends RecyclerView.Adapter<com.univpm.futsap
                     intent.putExtra("scelti",squadra);
                     ((Activity)context).startActivityForResult(intent,103);
 
+
                 }
             });
 

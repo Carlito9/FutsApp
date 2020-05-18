@@ -52,17 +52,15 @@ public class Register extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 final FirebaseUser user=mAuth.getCurrentUser();
-                                Toast.makeText(Register.this, "Registrazione completata", Toast.LENGTH_SHORT).show();
+
                                 UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(username)
                                         .build();
                                 user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        InsertUser(username);
-                                        Intent intent = new Intent();
-                                        setResult(RESULT_OK, intent);
-                                        finish();
+                                        InsertUser(username,user);
+
                                     }
                                 });
                             }else
@@ -80,8 +78,8 @@ public class Register extends AppCompatActivity {
         });
 
     }
-    private void InsertUser(String username) {
-        Map<String, Object> user = new HashMap<>();
+    private void InsertUser(String username, final FirebaseUser utente) {
+        final Map<String, Object> user = new HashMap<>();
         user.put("username", username);
         user.put("partite giocate",0);
         user.put("vittorie",0);
@@ -93,7 +91,26 @@ public class Register extends AppCompatActivity {
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> mappa = new HashMap<>();
+        mappa.put("giocatore0","nessuno");
         db.collection("utenti").document(username).set(user);
+        db.collection("utenti").document(username).collection("utente").document("amici").set(mappa);
+        db.collection("utenti").document(username).collection("utente").document("contatti").set(mappa).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(Register.this, "Registrazione completata", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
+                    utente.delete();
 
+                }
+            }
+        });
     }
 }

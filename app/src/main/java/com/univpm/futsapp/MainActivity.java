@@ -17,16 +17,20 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
@@ -42,20 +46,37 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     View headerView;
     ActionBarDrawerToggle toogle;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new DataLoad();
+        preferences = getSharedPreferences("login", MODE_PRIVATE);
+        apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
 
-
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser.getIdToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            String idToken = task.getResult().getToken();
+                            Log.d("TOKENMIO",idToken);
+                            // Send token to your backend via HTTPS
+                            // ...
+                        } else {
+                            // Handle error -> task.getException();
+                        }
+                    }
+                });
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(this)).commit();
         }
-
+        bottomNavigationView.setSelectedItemId(R.id.house);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
@@ -71,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.search:
                         fragment = new FragmentSearch();
                         break;
-
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
                 return true;
@@ -80,17 +100,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
-        if (preferences.getBoolean("firstrun", true)) {
-            Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
-            startActivityForResult(launchLogin, LOGIN_REQUEST);
-        } else {
-            onResume();
-        }
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -109,11 +124,13 @@ public class MainActivity extends AppCompatActivity {
                 editor.putBoolean("firstrun", false);
                 editor.apply();
             }
+            else if(resultCode== RESULT_CANCELED)
+                finish();
         }
     }
 
 
-    @Override
+@Override
     protected void onResume() {
         super.onResume();
         Map<String, Object> prova;
@@ -143,15 +160,21 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.logout: {
-                Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
-                startActivityForResult(launchLogin, LOGIN_REQUEST);
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstrun", true);
                 editor.apply();
-                finish();
+                apriLogin();
             }
             break;
+        }
+
+    }
+
+    void apriLogin (){
+        if (preferences.getBoolean("firstrun", true)) {
+            Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
+            startActivityForResult(launchLogin, LOGIN_REQUEST);
         }
 
     }

@@ -3,6 +3,7 @@ package com.univpm.futsapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -58,6 +59,12 @@ public class LoginActivity extends AppCompatActivity {
     public void registra(View view) {
         Intent launchRegister = new Intent(LoginActivity.this, Register.class);
         startActivityForResult(launchRegister, REGISTER_REQUEST);
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        finish();
     }
 
     @Override
