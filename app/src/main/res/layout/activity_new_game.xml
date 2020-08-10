@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewGameActivity"
+    tools:context=".NewGame.NewGameActivity"
     android:padding="20dp"
     android:background="@color/c1">
 
@@ -27,6 +28,7 @@
         android:layout_below="@+id/Costo"
         android:hint="Data"
         android:inputType="date"
+
         android:textAlignment="textEnd"
         android:textColor="@color/c3"
         android:textSize="20sp" />
@@ -34,10 +36,11 @@
     <TimePicker
         android:id="@+id/Orario"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="140dp"
+
         android:layout_below="@+id/Data"
-        android:layout_above="@id/linear"
         android:layout_marginTop="8dp"
+
         android:numbersSelectorColor="@color/c3"
         android:timePickerMode="spinner" />
 
@@ -59,7 +62,7 @@
         android:layout_below="@id/Luogo"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="6sp"
-        android:text="Euro"
+        android:text="@string/euro"
         android:textAlignment="textEnd"
         android:textColor="@color/c3"
         android:textSize="24sp" />
@@ -67,7 +70,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Orario"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:weightSum="2">
@@ -78,10 +82,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
+
             tools:listitem="@layout/fragment_list_item" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SquadraB"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

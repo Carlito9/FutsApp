@@ -13,4 +13,9 @@
     <string name="title_home">Rubrica</string>
     <string name="title_dashboard">Gruppi</string>
     <string name="title_notifications">Crea</string>
+    <string name="organizzatore">organizzatore:</string>
+    <string name="casa">CASA</string>
+    <string name="trasferta">TRASFERTA</string>
+    <string name="ospiti">OSPITI</string>
+    <string name="euro">€</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.NewGame;
 
 public class DataList {
     private String username;

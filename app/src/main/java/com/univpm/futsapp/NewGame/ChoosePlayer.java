@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.NewGame;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,12 +10,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.univpm.futsapp.R;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class ChoosePlayer extends AppCompatActivity {
@@ -28,7 +25,7 @@ public class ChoosePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player);
 
-        DataList[] players=NewGameActivity.players;
+        DataList[] players= NewGameActivity.players;
         RecyclerView giocatori = (RecyclerView) findViewById(R.id.fGiocatori);
         giocatori.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(this);
@@ -42,7 +39,6 @@ public class ChoosePlayer extends AppCompatActivity {
 
          mAuth = FirebaseAuth.getInstance();
 
-        System.out.println(scelti[0]);
         if(scelti[0].equals(mAuth.getCurrentUser().getDisplayName()))
             max=4;
 
@@ -73,7 +69,6 @@ public class ChoosePlayer extends AppCompatActivity {
             if (!s.equals("0"))
                 chosen.add(s);
         }
-        for(String s:chosen)
-            System.out.println(s);
+
     }
 }

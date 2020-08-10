@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.NewGame;
 //"?android:attr/listPreferredItemHeightLarge"
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,26 +9,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.univpm.futsapp.MainActivity;
+import com.univpm.futsapp.R;
 
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -50,19 +49,20 @@ public class NewGameActivity extends AppCompatActivity   {
     int day,month,y;
     String time;
 
+
     String[] teamA={"0","0","0","0","0"};
     String[] teamB={"0","0","0","0","0"};
-    Set<String> chosen= new HashSet<>();
+    //Set<String> chosen= new HashSet<>();
 
     public static DataList[] players;
     public static final int  CHOOSE_PLAYER= 103;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        teamA[0]=currentUser.getDisplayName();
+        teamA[0]= MainActivity.username;
 
 
 
@@ -93,9 +93,9 @@ public class NewGameActivity extends AppCompatActivity   {
                     public void onDateSet(DatePicker view, int year, int monthofyear, int dayOfMonth) {
 
                         y=year;
-                        month=monthofyear+1;
+                        month=monthofyear;
                         day=dayOfMonth;
-                        Data.setText(day+"/"+month+"/"+y);
+                        Data.setText(day+"/"+(month+1)+"/"+y);
 
                     }
                 },y,month,day);
@@ -130,6 +130,7 @@ public class NewGameActivity extends AppCompatActivity   {
     }
 
 
+
     public void save(View view){
         Map<String, Object> partita = new HashMap<>();
         try{
@@ -142,12 +143,14 @@ public class NewGameActivity extends AppCompatActivity   {
             time= Orario.getHour() +":"+Orario.getMinute();
         partita.put("costo",costo);
         partita.put("luogo",luogo);
-        partita.put("data", day+"-"+month+"-"+y);
+        //partita.put("data", day+"-"+(month+1)+"-"+y)
+        partita.put("data", y*10000+(month+1)*100+day);
+
         partita.put("ora", time);
-        if(teamA[4].equals("aggiungi giocatore") && teamB[4].equals("aggiungi giocatore"))
+        if(!teamA[4].equals("0") && !teamB[4].equals("0"))
             Salva(partita);
         else
-            Toast.makeText(this, "Crea le squadre", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Completa le squadre", Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
             Toast.makeText(NewGameActivity.this, "Riempire tutti i campi", Toast.LENGTH_SHORT).show();
@@ -161,12 +164,13 @@ public class NewGameActivity extends AppCompatActivity   {
             for (int i = 0; i < teamA.length; i++) {
                 for (String s : teamB) {
                     if (teamA[i].equals(s))
-                        throw new RuntimeException();
-                    match.put("giocatoreA" + i, teamA[i]);
-                }
-            }
+                        throw new RuntimeException();}
+                   // match.put("giocatoreA" + i, teamA[i]);
 
-            final DocumentReference docRef = db.collection("partite").document(String.valueOf(y)).collection(String.valueOf(y)).document(String.valueOf(month)).collection(String.valueOf(month)).document(String.valueOf(day)).collection(String.valueOf(day)).document();
+            }
+            match.put("giocatori", Arrays.asList(ArrayUtils.concat(teamA,teamB)));
+
+            final DocumentReference docRef = db.collection("partite").document();
             docRef.set(match).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -179,7 +183,7 @@ public class NewGameActivity extends AppCompatActivity   {
 
             });
         }
-        catch (RuntimeException e){Toast.makeText(NewGameActivity.this, "Stesso Giocatore presente un due squadre", Toast.LENGTH_SHORT).show();}
+        catch (RuntimeException e){Toast.makeText(NewGameActivity.this, "Stesso giocatore presente in due squadre", Toast.LENGTH_SHORT).show();}
     }
 
 
@@ -193,7 +197,7 @@ public class NewGameActivity extends AppCompatActivity   {
 
     }
 
-    private void RiempiLista(List<Map<String,Object>> lista)
+  /*  private void RiempiLista(List<Map<String,Object>> lista)
     {
         //List<DataList> l=new ArrayList<>();
         players=new DataList[lista.size()];
@@ -207,4 +211,6 @@ public class NewGameActivity extends AppCompatActivity   {
 
         //players= (DataList[]) l.toArray();
     }
+*/
+
 }

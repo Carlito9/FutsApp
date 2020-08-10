@@ -10,30 +10,33 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 
+import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Map;
+import com.univpm.futsapp.loginRegistration.LoginActivity;
+import com.univpm.futsapp.utilities.DataLoad;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,30 +50,25 @@ public class MainActivity extends AppCompatActivity {
     View headerView;
     ActionBarDrawerToggle toogle;
     SharedPreferences preferences;
+    public static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //riempie array giocatori
         new DataLoad();
+
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
 
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mUser.getIdToken(true)
-                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                    public void onComplete(@NonNull Task<GetTokenResult> task) {
-                        if (task.isSuccessful()) {
-                            String idToken = task.getResult().getToken();
-                            Log.d("TOKENMIO",idToken);
-                            // Send token to your backend via HTTPS
-                            // ...
-                        } else {
-                            // Handle error -> task.getException();
-                        }
-                    }
-                });
+        /*NotificationCompat.Builder n = new NotificationCompat.Builder(this, NotificationChannel.DEFAULT_CHANNEL_ID)
+                .setContentTitle("Arrivato nuovo messaggio!!")
+                .setContentText("Autore: Nicola Rossi")
+                .setSmallIcon(android.R.drawable.ic_dialog_email);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(0, n.build());*/
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(this)).commit();
         }
@@ -108,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toogle);
         toogle.syncState();
@@ -133,9 +130,9 @@ public class MainActivity extends AppCompatActivity {
 @Override
     protected void onResume() {
         super.onResume();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String username, email;
-        mAuth = FirebaseAuth.getInstance();
+        //FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String email;
+       // mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         username = currentUser.getDisplayName();
         email = currentUser.getEmail();
@@ -143,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         slotUsername.setText(username);
         TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
         slotEmail.setText(email);
+        new DataLoad(username);
     }
 
 
@@ -177,4 +175,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

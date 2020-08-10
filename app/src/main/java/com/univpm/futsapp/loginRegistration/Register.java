@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.loginRegistration;
 
 
 import androidx.annotation.NonNull;
@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.univpm.futsapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +72,7 @@ public class Register extends AppCompatActivity {
                     });
 
                 }
-                catch (NullPointerException e){
+                catch (IllegalArgumentException e){
                 Toast.makeText(Register.this, "Riempire tutti i campi per favore",Toast.LENGTH_SHORT).show();
                 }
             }

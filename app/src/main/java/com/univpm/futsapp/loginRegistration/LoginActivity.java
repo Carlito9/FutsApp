@@ -1,9 +1,8 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.loginRegistration;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.univpm.futsapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
                 String email = textEmail.getText().toString();
                 String password = textPassword.getText().toString();
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -52,6 +53,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+                }
+                catch (IllegalArgumentException e){
+                    Toast.makeText(LoginActivity.this, "Riempire tutti i campi per favore",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

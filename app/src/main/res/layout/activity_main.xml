@@ -29,13 +29,15 @@
         android:layout_below="@id/toolbar"
         android:id="@+id/fragmentContainer"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:background="@color/c3"
-        android:layout_height="wrap_content"
-        app:menu="@menu/menu"
-        android:id="@+id/bottomNav"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@color/c3"
+            android:layout_height="wrap_content"
+            app:menu="@menu/menu"
+            android:id="@+id/bottomNav" />
+
+
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"

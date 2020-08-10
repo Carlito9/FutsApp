@@ -1,25 +1,21 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.NewGame;
 
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import java.util.Set;
+import com.univpm.futsapp.R;
 
-import io.opencensus.resource.Resource;
+import java.util.Set;
 
 
 public class ListaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHolder> {
@@ -41,6 +37,7 @@ public class ListaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHold
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.fragment_list_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
+
         return viewHolder;
     }
 
@@ -78,12 +75,12 @@ public class ListaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHold
         return listdata.length;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView rating;
-        public TextView username;
-        public RelativeLayout relativeLayout;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView rating;
+        TextView username;
+        RelativeLayout relativeLayout;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             this.rating = (TextView) itemView.findViewById(R.id.rating);
             this.username = (TextView) itemView.findViewById(R.id.uname);

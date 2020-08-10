@@ -11,7 +11,8 @@
         android:icon="@drawable/home"/>
     <item
         android:id="@+id/contact"
-        android:title="Book"
-        android:icon="@drawable/search"/>
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Notifiche"/>
+
 
 </menu>
