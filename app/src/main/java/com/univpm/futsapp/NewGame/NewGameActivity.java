@@ -19,13 +19,11 @@ import android.widget.Toast;
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.univpm.futsapp.MainActivity;
 import com.univpm.futsapp.R;
-import com.univpm.futsapp.utilities.DataLoad;
+
 
 
 import java.util.Arrays;
@@ -40,6 +38,7 @@ import static com.univpm.futsapp.MainActivity.players;
 
 public class NewGameActivity extends AppCompatActivity   {
 
+
     EditText Luogo,Costo;
 
     TimePicker Orario;
@@ -51,6 +50,7 @@ public class NewGameActivity extends AppCompatActivity   {
     Calendar mCurrentDate;
     int day,month,y;
     String time;
+    public static DataList[] amici;
 
 
     String[] teamA={"0","0","0","0","0"};
@@ -75,12 +75,10 @@ public class NewGameActivity extends AppCompatActivity   {
         Orario=(TimePicker)findViewById(R.id.Orario);
 
 
-
         giocatoriA = (RecyclerView) findViewById(R.id.SquadraA);
         FragSetter(teamA,giocatoriA);
         giocatoriB = (RecyclerView) findViewById(R.id.SquadraB);
         FragSetter(teamB,giocatoriB);
-
 
 
         mCurrentDate = Calendar.getInstance();
@@ -194,26 +192,12 @@ public class NewGameActivity extends AppCompatActivity   {
         giocatori.setHasFixedSize(true);
         lManager = new LinearLayoutManager(this);
 
-        mAdapter = new ListaDoppiaGiocatori(players,this,team);
+        mAdapter = new ListaDoppiaGiocatori(amici,this,team);
         giocatori.setAdapter(mAdapter);
         giocatori.setLayoutManager(lManager);
 
     }
 
-  /*  private void RiempiLista(List<Map<String,Object>> lista)
-    {
-        //List<DataList> l=new ArrayList<>();
-        players=new DataList[lista.size()];
-        int i=0;
-        for(Map<String,Object> m: lista)
-        {
-            DataList a=new DataList((String)m.get("username"),Integer.parseInt(String.valueOf(m.get("rating"))));
-            players[i++]=a;
-            // l.add(new DataList((String)m.get("username"),Integer.parseInt(String.valueOf(m.get("rating")))));
-        }
 
-        //players= (DataList[]) l.toArray();
-    }
-*/
 
 }

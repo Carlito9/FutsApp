@@ -26,7 +26,7 @@ public class ChoosePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player);
 
-        DataList[] players= MainActivity.players;
+        DataList[] players= NewGameActivity.amici;
         RecyclerView giocatori = (RecyclerView) findViewById(R.id.fGiocatori);
         giocatori.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(this);

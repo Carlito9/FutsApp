@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void CaricaPartite(){
-        new DataLoad(username,1);
+        new DataLoad(username);
     }
     public static void CaricaUtenti(){
         new DataLoad();

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -23,36 +22,36 @@ import java.util.List;
 public class DataLoad {
     FirebaseFirestore db;
     List<DataList> lista=new ArrayList<>();
-
+    List<DataList> listamici=new ArrayList<>();
     List<Matchlist> list=new ArrayList<>();
 
     public DataLoad()
     {
         db=FirebaseFirestore.getInstance();
-        db.collection("utenti")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                DataList a=new DataList((String)document.getData().get("username"),Integer.parseInt(String.valueOf(document.getData().get("rating"))));
-                                lista.add(a);
+                        db.collection("utenti")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                DataList a=new DataList((String)document.getData().get("username"),Integer.parseInt(String.valueOf(document.getData().get("rating"))));
+                                                lista.add(a);
 
-                            }
-                        } else {
-                            System.out.println("Error getting documents: " + task.getException());
-                        }
+                                            }
+                                        } else {
+                                            System.out.println("Error getting documents: " + task.getException());
+                                        }
 
-                        MainActivity.players= lista.toArray(new DataList[0]);
-                        }
-                });
-
+                                        MainActivity.players= lista.toArray(new DataList[0]);
+                                        CaricaAmici(MainActivity.username);
+                                    }
+                                });
     }
 
 
-    public DataLoad(String user, int primaDopo) {
+    public DataLoad(String user) {
         /*String temp;
         for (int i = 0; i < 10; i++) {
             if(i<5)
@@ -69,17 +68,10 @@ public class DataLoad {
 
                 //db.collection("partite").document(String.valueOf(y)).collection(String.valueOf(y)).document(String.valueOf(month)).collection(String.valueOf(month)).document(String.valueOf(day)).collection(String.valueOf(day))
                         //.whereEqualTo("giocatore" + temp, user)
-                        if(primaDopo==1)
-                            q=db.collection("partite")
-                            .whereArrayContains("giocatori", user)
-                            .whereGreaterThanOrEqualTo("data",y*10000+(month)*100+day);
-                        else
-                            q=db.collection("partite")
-                            .whereArrayContains("giocatori", user)
-                            .whereLessThan("data",y*10000+(month)*100+day);
 
-                        q.get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            q=db.collection("partite").whereArrayContains("giocatori", user);
+
+                    q.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
@@ -99,10 +91,35 @@ public class DataLoad {
 
     }
 
+    public void CaricaAmici(String user)
+    {
+
+        db.collection("utenti").document(user)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        ArrayList<String> nomi;
+                        if (task.isSuccessful())
+                        {
+                            nomi= (ArrayList<String>) task.getResult().get("amici");
+                            for(DataList d: lista)
+                                {
+                                    if(nomi.contains(d.getUsername()))
+                                        listamici.add(d);
+                                }
+                            }
+                        NewGameActivity.amici= listamici.toArray(new DataList[0]);
+                    }
+                });
+
+    }
+
     private String ConvertData(Integer data){
         int giorno=data%100;
         int mese=(data-giorno)/100%100;
         int anno=(data-(mese*100)-giorno)/10000%10000;
         return giorno+"-"+mese+"-"+anno;
     }
+
 }

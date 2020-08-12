@@ -81,7 +81,10 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
 
     @Override
     public int getItemCount() {
-        return listdata.length;
+        try {
+            return listdata.length;
+        }
+        catch (NullPointerException e){return 0;}
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

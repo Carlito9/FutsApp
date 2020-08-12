@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import static com.univpm.futsapp.MainActivity.CaricaPartite;
 import static com.univpm.futsapp.MainActivity.CaricaUtenti;
 
@@ -14,10 +15,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
         MainActivity.preferences = getSharedPreferences("login", MODE_PRIVATE);
-        MainActivity.username=MainActivity.preferences.getString("username","nnn");
+        MainActivity.username=MainActivity.preferences.getString("user","nnn");
         CaricaUtenti();
         CaricaPartite();
+
         Thread background = new Thread() {
             public void run() {
                 try {sleep(5*1000);
@@ -29,8 +32,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         background.start();
-        //Intent i=new Intent(this,MainActivity.class);
-        //startActivity(i);
-        //finish();
+
+
     }
 }
