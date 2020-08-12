@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.univpm.futsapp.MainActivity;
 import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.DataLoad;
 
 
 import java.util.Arrays;
@@ -34,6 +35,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static com.univpm.futsapp.MainActivity.players;
 
 public class NewGameActivity extends AppCompatActivity   {
 
@@ -54,7 +57,7 @@ public class NewGameActivity extends AppCompatActivity   {
     String[] teamB={"0","0","0","0","0"};
     //Set<String> chosen= new HashSet<>();
 
-    public static DataList[] players;
+
     public static final int  CHOOSE_PLAYER= 103;
 
 

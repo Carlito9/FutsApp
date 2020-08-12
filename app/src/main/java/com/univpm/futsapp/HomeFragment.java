@@ -47,10 +47,12 @@ private class Navigator implements View.OnClickListener {
             case R.id.bIdeeFuture:
                 show("open social");
                 break;
-            case R.id.bNuovaPartita:
+            case R.id.bNuovaPartita: {
                 show("creiamo una nuova partita");
+                MainActivity.check=false;
                 openNewGame();
                 break;
+                }
             case R.id.bProssimoEvento:
                 show("il prossimo evento è...");
                 break;

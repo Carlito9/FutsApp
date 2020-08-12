@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,8 +36,13 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.univpm.futsapp.NewGame.DataList;
 import com.univpm.futsapp.loginRegistration.LoginActivity;
 import com.univpm.futsapp.utilities.DataLoad;
+
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -49,16 +55,16 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     View headerView;
     ActionBarDrawerToggle toogle;
-    SharedPreferences preferences;
+    public static SharedPreferences preferences;
     public static String username;
-
+    public static boolean check;
+    public static DataList[] players;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //riempie array giocatori
-        new DataLoad();
-
+            //riempie array giocatori
+        check=false;
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -116,11 +122,16 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, getCredentials);
         if (requestCode == LOGIN_REQUEST) {
             if (resultCode == RESULT_OK) {
+
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                username=currentUser.getDisplayName();
+                CaricaPartite();
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstrun", false);
+                editor.putString("user",username);
                 editor.apply();
-            }
+                            }
             else if(resultCode== RESULT_CANCELED)
                 finish();
         }
@@ -130,17 +141,20 @@ public class MainActivity extends AppCompatActivity {
 @Override
     protected void onResume() {
         super.onResume();
-        //FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String email;
-       // mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        username = currentUser.getDisplayName();
-        email = currentUser.getEmail();
-        TextView slotUsername = (TextView) headerView.findViewById(R.id.slotUsername);
-        slotUsername.setText(username);
-        TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
-        slotEmail.setText(email);
-        new DataLoad(username);
+
+        if(!check) {//FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String email;
+            //mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            username = currentUser.getDisplayName();
+            email = currentUser.getEmail();
+            TextView slotUsername = (TextView) headerView.findViewById(R.id.slotUsername);
+            slotUsername.setText(username);
+            TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
+            slotEmail.setText(email);
+            check = true;
+
+        }
     }
 
 
@@ -154,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.about:
                 Toast.makeText(MainActivity.this, "About us Selected", Toast.LENGTH_SHORT).show();
-
                 break;
             case R.id.logout: {
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
@@ -174,6 +187,13 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(launchLogin, LOGIN_REQUEST);
         }
 
+    }
+
+    public static void CaricaPartite(){
+        new DataLoad(username,1);
+    }
+    public static void CaricaUtenti(){
+        new DataLoad();
     }
 
 

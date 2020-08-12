@@ -22,12 +22,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.univpm.futsapp.utilities.DataLoad;
+
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 
 public class FragmentContact extends Fragment {
 
     public static Matchlist[] matchlist;
+    public String username;
+
 
     @Nullable
     @Override
@@ -43,7 +47,6 @@ public class FragmentContact extends Fragment {
 
         return view;
     }
-
 
 
 }

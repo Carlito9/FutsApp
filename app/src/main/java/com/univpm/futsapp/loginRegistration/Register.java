@@ -20,6 +20,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.univpm.futsapp.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +91,7 @@ public class Register extends AppCompatActivity {
         user.put("gol fatti",0);
         user.put("media voto",6.0);
         user.put("rating",60);
+        user.put("amici", Arrays.asList(username));
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

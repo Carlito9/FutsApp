@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.univpm.futsapp.FragmentContact;
+import com.univpm.futsapp.MainActivity;
 import com.univpm.futsapp.Matchlist;
 import com.univpm.futsapp.NewGame.DataList;
 import com.univpm.futsapp.NewGame.NewGameActivity;
@@ -19,11 +23,12 @@ import java.util.List;
 public class DataLoad {
     FirebaseFirestore db;
     List<DataList> lista=new ArrayList<>();
+
     List<Matchlist> list=new ArrayList<>();
 
     public DataLoad()
     {
-        db= FirebaseFirestore.getInstance();
+        db=FirebaseFirestore.getInstance();
         db.collection("utenti")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -40,11 +45,14 @@ public class DataLoad {
                             System.out.println("Error getting documents: " + task.getException());
                         }
 
-                        NewGameActivity.players= lista.toArray(new DataList[0]);}
+                        MainActivity.players= lista.toArray(new DataList[0]);
+                        }
                 });
 
     }
-    public DataLoad(String user) {
+
+
+    public DataLoad(String user, int primaDopo) {
         /*String temp;
         for (int i = 0; i < 10; i++) {
             if(i<5)
@@ -56,20 +64,27 @@ public class DataLoad {
             int day=calendario.get(Calendar.DAY_OF_MONTH);
             int month=calendario.get(Calendar.MONTH)+1;
             int y=calendario.get(Calendar.YEAR);
-
+            Query q;
             db = FirebaseFirestore.getInstance();
 
                 //db.collection("partite").document(String.valueOf(y)).collection(String.valueOf(y)).document(String.valueOf(month)).collection(String.valueOf(month)).document(String.valueOf(day)).collection(String.valueOf(day))
                         //.whereEqualTo("giocatore" + temp, user)
-                        db.collection("partite")
-                        .whereArrayContains("giocatori", user)
-                        .whereGreaterThanOrEqualTo("data",y*10000+(month)*100+day)
-                        .get()
+                        if(primaDopo==1)
+                            q=db.collection("partite")
+                            .whereArrayContains("giocatori", user)
+                            .whereGreaterThanOrEqualTo("data",y*10000+(month)*100+day);
+                        else
+                            q=db.collection("partite")
+                            .whereArrayContains("giocatori", user)
+                            .whereLessThan("data",y*10000+(month)*100+day);
+
+                        q.get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                    for (QueryDocumentSnapshot document : task.getResult())
+                                    {
                                         ArrayList<String> giocatori= (ArrayList<String>) document.getData().get("giocatori");
                                         Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(int)(long)document.getData().get("costo"));
                                         list.add(a);
