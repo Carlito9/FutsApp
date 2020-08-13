@@ -148,6 +148,7 @@ public class NewGameActivity extends AppCompatActivity   {
         partita.put("data", y*10000+(month+1)*100+day);
 
         partita.put("ora", time);
+        partita.put("risultato", "no");
         if(!teamA[4].equals("0") && !teamB[4].equals("0"))
             Salva(partita);
         else

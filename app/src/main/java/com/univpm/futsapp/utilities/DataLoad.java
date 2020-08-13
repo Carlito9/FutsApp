@@ -23,7 +23,8 @@ public class DataLoad {
     FirebaseFirestore db;
     List<DataList> lista=new ArrayList<>();
     List<DataList> listamici=new ArrayList<>();
-    List<Matchlist> list=new ArrayList<>();
+    List<Matchlist> giocate=new ArrayList<>();
+    List<Matchlist> dafare=new ArrayList<>();
 
     public DataLoad()
     {
@@ -36,7 +37,7 @@ public class DataLoad {
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                                DataList a=new DataList((String)document.getData().get("username"),Integer.parseInt(String.valueOf(document.getData().get("rating"))));
+                                                DataList a=new DataList((String)document.getData().get("username"),Integer.parseInt(String.valueOf(document.getData().get("rating"))),document.getData());
                                                 lista.add(a);
 
                                             }
@@ -60,9 +61,9 @@ public class DataLoad {
                 temp="B"+i;*/
             Calendar calendario;
             calendario= Calendar.getInstance();
-            int day=calendario.get(Calendar.DAY_OF_MONTH);
-            int month=calendario.get(Calendar.MONTH)+1;
-            int y=calendario.get(Calendar.YEAR);
+            final int day=calendario.get(Calendar.DAY_OF_MONTH);
+            final int month=calendario.get(Calendar.MONTH)+1;
+            final int y=calendario.get(Calendar.YEAR);
             Query q;
             db = FirebaseFirestore.getInstance();
 
@@ -79,19 +80,23 @@ public class DataLoad {
                                     {
                                         ArrayList<String> giocatori= (ArrayList<String>) document.getData().get("giocatori");
                                         Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(int)(long)document.getData().get("costo"));
-                                        list.add(a);
+                                        if((int) (long)document.getData().get("data")>=(y*10000+(month)*100+day))
+                                            dafare.add(a);
+                                        else
+                                            giocate.add(a);
                                     }
                                 } else {
                                     System.out.println("Error getting documents: " + task.getException());
                                 }
-                                FragmentContact.matchlist = list.toArray(new Matchlist[0]);
+                                MainActivity.daFare = dafare.toArray(new Matchlist[0]);
+                                MainActivity.giocate=giocate.toArray(new Matchlist[0]);
                             }
                         });
 
 
     }
 
-    public void CaricaAmici(String user)
+    private void CaricaAmici(String user)
     {
 
         db.collection("utenti").document(user)

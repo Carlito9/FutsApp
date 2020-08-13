@@ -1,11 +1,15 @@
 package com.univpm.futsapp.NewGame;
 
+import java.util.Map;
+
 public class DataList {
     private String username;
     private int rating;
-    public DataList(String username, int rating) {
+    private Map<String, Object> dati;
+    public DataList(String username, int rating, Map<String, Object> dati) {
         this.username = username;
         this.rating = rating;
+        this.dati = dati;
     }
     public String getUsername() {
         return username;
@@ -19,4 +23,6 @@ public class DataList {
     public void setRating(int rating) {
         this.rating = rating;
     }
+    public Map<String, Object> getDati() {return dati;}
+    public void setDati(Map<String, Object> dati) {this.dati = dati;}
 }

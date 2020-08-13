@@ -29,8 +29,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class FragmentContact extends Fragment {
 
-    public static Matchlist[] matchlist;
-    public String username;
+
 
 
     @Nullable
@@ -41,7 +40,7 @@ public class FragmentContact extends Fragment {
         RecyclerView giocatori = (RecyclerView) view.findViewById(R.id.Notifiche);
         giocatori.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(view.getContext());
-        RecyclerView.Adapter mAdapter = new ListaNotifiche(matchlist,view.getContext());
+        RecyclerView.Adapter mAdapter = new ListaNotifiche(MainActivity.daFare,view.getContext());
         giocatori.setAdapter(mAdapter);
         giocatori.setLayoutManager(lManager);
 

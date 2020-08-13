@@ -35,14 +35,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.univpm.futsapp.NewGame.DataList;
 import com.univpm.futsapp.loginRegistration.LoginActivity;
 import com.univpm.futsapp.utilities.DataLoad;
 
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -59,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     public static String username;
     public static boolean check;
     public static DataList[] players;
+    public static Matchlist[] daFare;
+    public static Matchlist[] giocate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
