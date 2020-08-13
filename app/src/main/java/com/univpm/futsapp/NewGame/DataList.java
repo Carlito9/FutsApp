@@ -6,10 +6,15 @@ public class DataList {
     private String username;
     private int rating;
     private Map<String, Object> dati;
+
     public DataList(String username, int rating, Map<String, Object> dati) {
         this.username = username;
         this.rating = rating;
         this.dati = dati;
+    }
+    public DataList(String username, int rating) {
+        this.username = username;
+        this.rating = rating;
     }
     public String getUsername() {
         return username;
