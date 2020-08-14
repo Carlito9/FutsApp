@@ -65,6 +65,7 @@ private class Navigator implements View.OnClickListener {
                 break;}
             case R.id.bProssimoEvento:
                 show("il prossimo evento è...");
+                openNext();
                 break;
         }
 
@@ -72,6 +73,10 @@ private class Navigator implements View.OnClickListener {
 
     private void openNewGame() {
         Intent intent = new Intent(getView().getContext(), NewGameActivity.class);
+        startActivity(intent);
+    }
+    public  void openNext(){
+        Intent intent = new Intent(getView().getContext(), NextActivity.class);
         startActivity(intent);
     }
 
