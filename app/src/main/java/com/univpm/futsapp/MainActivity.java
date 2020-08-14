@@ -52,28 +52,25 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     View headerView;
     ActionBarDrawerToggle toogle;
+    String email="nessuna";
     public static SharedPreferences preferences;
     public static String username;
     public static boolean check;
     public static DataList[] players;
     public static Matchlist[] daFare;
     public static Matchlist[] giocate;
+    public static Matchlist[] daRegistrare;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
             //riempie array giocatori
-        check=false;
+        aggiorna();
+        check=true;
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
 
-        /*NotificationCompat.Builder n = new NotificationCompat.Builder(this, NotificationChannel.DEFAULT_CHANNEL_ID)
-                .setContentTitle("Arrivato nuovo messaggio!!")
-                .setContentText("Autore: Nicola Rossi")
-                .setSmallIcon(android.R.drawable.ic_dialog_email);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, n.build());*/
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(this)).commit();
         }
@@ -140,9 +137,7 @@ public class MainActivity extends AppCompatActivity {
 @Override
     protected void onResume() {
         super.onResume();
-
-        if(!check) {//FirebaseFirestore db = FirebaseFirestore.getInstance();
-            String email;
+        if(email.equals("nessuna")) {//FirebaseFirestore db = FirebaseFirestore.getInstance();
             //mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
             username = currentUser.getDisplayName();
@@ -151,8 +146,6 @@ public class MainActivity extends AppCompatActivity {
             slotUsername.setText(username);
             TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
             slotEmail.setText(email);
-            check = true;
-
         }
     }
 
@@ -195,5 +188,24 @@ public class MainActivity extends AppCompatActivity {
         new DataLoad();
     }
 
-
+    private void aggiorna()
+    {
+        Thread background = new Thread() {
+            public void run() {
+                while (true) {
+                    try {
+                        sleep(5*60*1000);
+                        if (!check) {
+                            CaricaPartite();
+                            CaricaUtenti();
+                        } else
+                            check = false;
+                    } catch (Exception e) {
+                        System.out.println("");
+                    }
+                }
+            }
+        };
+        background.start();
+    }
 }

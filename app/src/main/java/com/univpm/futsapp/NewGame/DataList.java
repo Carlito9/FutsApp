@@ -11,6 +11,12 @@ public class DataList {
         this.rating = rating;
         this.dati = dati;
     }
+
+    public DataList(String username,int rating)
+    {
+        this.username = username;
+        this.rating = rating;
+    }
     public String getUsername() {
         return username;
     }

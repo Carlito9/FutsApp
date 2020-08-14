@@ -12,10 +12,10 @@ public class Storico extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_storico);
-        RecyclerView storico = (RecyclerView) findViewById(R.id.Notifiche);
+        RecyclerView storico = (RecyclerView) findViewById(R.id.Storico);
         storico.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(this);
-        RecyclerView.Adapter mAdapter = new ListaNotifiche(MainActivity.daFare,this);
+        RecyclerView.Adapter mAdapter = new ListaNotifiche(MainActivity.giocate,this);
         storico.setAdapter(mAdapter);
         storico.setLayoutManager(lManager);
     }

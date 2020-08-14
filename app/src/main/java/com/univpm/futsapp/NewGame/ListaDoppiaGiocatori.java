@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.univpm.futsapp.R;
 
+import java.util.Map;
+
 public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHolder> {
         private DataList[] listdata=new DataList[5];
         Context context;
@@ -29,13 +31,12 @@ public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.Vi
             for (String s:squadra){
                 if(s.equals("0"))
                 {
-                    this.listdata[i++]=new DataList("aggiungi giocatore",0);
+                    this.listdata[i++]=new DataList("aggiungi giocatore", 0);
                     continue;
                 }
                 for (DataList a:listdata){
                     if(s.equals(a.getUsername()))
                         this.listdata[i++]=a;
-
                 }
                 if(i==5)
                     break;

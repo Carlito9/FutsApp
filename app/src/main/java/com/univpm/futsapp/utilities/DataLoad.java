@@ -25,6 +25,7 @@ public class DataLoad {
     List<DataList> listamici=new ArrayList<>();
     List<Matchlist> giocate=new ArrayList<>();
     List<Matchlist> dafare=new ArrayList<>();
+    List<Matchlist> daregistrare=new ArrayList<>();
 
     public DataLoad()
     {
@@ -52,7 +53,7 @@ public class DataLoad {
     }
 
 
-    public DataLoad(String user) {
+    public DataLoad(final String user) {
         /*String temp;
         for (int i = 0; i < 10; i++) {
             if(i<5)
@@ -79,10 +80,12 @@ public class DataLoad {
                                     for (QueryDocumentSnapshot document : task.getResult())
                                     {
                                         ArrayList<String> giocatori= (ArrayList<String>) document.getData().get("giocatori");
-                                        Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(int)(long)document.getData().get("costo"));
+                                        Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(int)(long)document.getData().get("costo"),(String)document.getData().get("risultato"));
                                         if((int) (long)document.getData().get("data")>=(y*10000+(month)*100+day))
                                             dafare.add(a);
-                                        else
+                                        else if(a.getTeams().get(0).equals(user) && a.getRisultato().equals(document.getId()))
+                                            daregistrare.add(a);
+                                        else if(!a.getRisultato().equals(document.getId()))
                                             giocate.add(a);
                                     }
                                 } else {
@@ -90,6 +93,7 @@ public class DataLoad {
                                 }
                                 MainActivity.daFare = dafare.toArray(new Matchlist[0]);
                                 MainActivity.giocate=giocate.toArray(new Matchlist[0]);
+                                MainActivity.daRegistrare = daregistrare.toArray(new Matchlist[0]);
                             }
                         });
 

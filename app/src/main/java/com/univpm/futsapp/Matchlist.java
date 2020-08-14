@@ -10,14 +10,15 @@ public class Matchlist {
     private String orario;
     private String luogo;
     private int costo;
+    private String risultato;
 
-    public Matchlist(ArrayList<String> teams, String data, String orario, String luogo, int costo){
+    public Matchlist(ArrayList<String> teams, String data, String orario, String luogo, int costo, String risultato){
         this.teams=teams;
         this.data=data;
         this.orario=orario;
         this.luogo=luogo;
         this.costo=costo;
-
+        this.risultato=risultato;
     }
 
     public String getData() {
@@ -52,11 +53,13 @@ public class Matchlist {
         this.luogo = luogo;
     }
 
-    public int getCosto() {
-        return costo;
-    }
+    public int getCosto() {return costo;}
 
     public void setCosto(int costo) {
         this.costo = costo;
     }
+
+    public String getRisultato() {return risultato;}
+
+    public void setRisultato(String risultato) {this.risultato = risultato;}
 }

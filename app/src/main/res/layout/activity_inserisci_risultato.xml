@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Storico">
-
+    tools:context=".InserisciRisultato">
 
     <androidx.recyclerview.widget.RecyclerView
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:id="@+id/Storico"
-        tools:listitem="@layout/fragment_card_item">
+        android:id="@+id/InserisciRisultato"
+        tools:listitem="@layout/inserisci_risultato_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 

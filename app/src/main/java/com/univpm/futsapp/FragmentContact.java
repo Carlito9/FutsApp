@@ -43,7 +43,6 @@ public class FragmentContact extends Fragment {
         RecyclerView.Adapter mAdapter = new ListaNotifiche(MainActivity.daFare,view.getContext());
         giocatori.setAdapter(mAdapter);
         giocatori.setLayoutManager(lManager);
-
         return view;
     }
 
