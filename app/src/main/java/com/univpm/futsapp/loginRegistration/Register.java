@@ -89,17 +89,13 @@ public class Register extends AppCompatActivity {
         user.put("pareggi",0);
         user.put("sconfitte",0);
         user.put("gol fatti",0);
-        user.put("media voto",6.0);
         user.put("rating",60);
         user.put("amici", Arrays.asList(username));
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> mappa = new HashMap<>();
-        mappa.put("giocatore0","nessuno");
-        db.collection("utenti").document(username).set(user);
-        db.collection("utenti").document(username).collection("utente").document("amici").set(mappa);
-        db.collection("utenti").document(username).collection("utente").document("contatti").set(mappa).addOnCompleteListener(new OnCompleteListener<Void>() {
+        db.collection("utenti").document(username).set(user)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful())

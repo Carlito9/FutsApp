@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        CheckBadge();
             //riempie array giocatori
         aggiorna();
         check=true;
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         }
         bottomNavigationView.setSelectedItemId(R.id.house);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
             slotEmail.setText(email);
         }
+        CheckBadge();
     }
 
 
@@ -207,5 +208,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         background.start();
+    }
+
+    public void CheckBadge() {
+        try {
+            if (MainActivity.daRegistrare.length == 0)
+                findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE);
+        } catch (NullPointerException e) {
+                findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE);
+        }
     }
 }

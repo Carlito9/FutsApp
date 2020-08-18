@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,7 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
         @Override
         public void onBindViewHolder(@NonNull final ListaStorico.ViewHolder holder, int position) {
             final Matchlist lista = listdata[position];
-            myDialog.setContentView(R.layout.popup_partite);
+            myDialog.setContentView(R.layout.popup_vedi_risultato);
             holder.capo.setText(String.format("organizzatore: %s", lista.getTeams().get(0)));
             holder.data.setText(String.valueOf(lista.getData()));
             holder.luogo.setText(String.valueOf(lista.getLuogo()));
@@ -46,25 +47,38 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
                     TextView txtclose;
                     TextView[] casa;
                     TextView[] trasferta;
+                    TextView[] golA;
+                    TextView[] golB;
                     TextView ora;
                     TextView data;
                     TextView stadio;
-                    TextView costo;
+                    TextView golCasa;
+                    TextView golOspiti;
+
+
                     txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
                     casa=(TextView[]) new TextView[]{myDialog.findViewById(R.id.playerA0), myDialog.findViewById(R.id.playerA1), myDialog.findViewById(R.id.playerA2), myDialog.findViewById(R.id.playerA3), myDialog.findViewById(R.id.playerA4)};
                     trasferta=(TextView[]) new TextView[]{myDialog.findViewById(R.id.playerB0), myDialog.findViewById(R.id.playerB1), myDialog.findViewById(R.id.playerB2), myDialog.findViewById(R.id.playerB3), myDialog.findViewById(R.id.playerB4)};
+                    golA= (TextView[]) new TextView[] {myDialog.findViewById(R.id.golA0),myDialog.findViewById(R.id.golA1),myDialog.findViewById(R.id.golA2),myDialog.findViewById(R.id.golA3),myDialog.findViewById(R.id.golA4)};
+                    golB= (TextView[]) new TextView[] {myDialog.findViewById(R.id.golB0),myDialog.findViewById(R.id.golB1),myDialog.findViewById(R.id.golB2),myDialog.findViewById(R.id.golB3),myDialog.findViewById(R.id.golB4)};
                     for (int i=0;i<5;i++){
                         casa[i].setText(lista.getTeams().get(i));
+                        golA[i].setText(String.valueOf((int)(long) lista.getGolgioc()[i]));
                         trasferta[i].setText(lista.getTeams().get(i+5));
+                        golB[i].setText(String.valueOf((int)(long)lista.getGolgioc()[i+5]));
                     }
                     ora= (TextView) myDialog.findViewById(R.id.oraPartita);
                     data= (TextView) myDialog.findViewById(R.id.date);
                     stadio= (TextView) myDialog.findViewById(R.id.stadio);
-                    costo= (TextView) myDialog.findViewById(R.id.costoPartita);
+                    golCasa= (TextView) myDialog.findViewById(R.id.golCasa);
+                    golOspiti= (TextView) myDialog.findViewById(R.id.golOspite);
                     ora.setText(lista.getOrario());
                     data.setText(lista.getData());
                     stadio.setText(lista.getLuogo());
-                    costo.setText(String.valueOf(lista.getCosto()));
+                    golCasa.setText(lista.getgolCasa());
+                    System.out.println("lista"+lista.getgolCasa());
+                    golOspiti.setText(lista.getgolOspite());
+                    System.out.println("lista2222"+lista.getgolOspite());
                     txtclose.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

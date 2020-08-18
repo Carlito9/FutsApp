@@ -5,22 +5,25 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.univpm.futsapp.InserisciRisultato;
 import com.univpm.futsapp.MainActivity;
 import com.univpm.futsapp.NewGame.DataList;
 import com.univpm.futsapp.NewGame.NewGameActivity;
 import com.univpm.futsapp.SplashActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class DataSave {
-        FirebaseFirestore db;
+        private FirebaseFirestore db;
     public void SaveMatch(int totale_casa, int totale_ospiti, final Integer[] golgiocA, final Integer[] golgiocB, final ArrayList<String> teams, final Dialog myDialog, String id) {
         db=FirebaseFirestore.getInstance();
         final int segno;
@@ -34,9 +37,11 @@ public class DataSave {
         }
         else
             segno=0;
+        final Integer[] golgioc= ArrayUtils.concat(golgiocA,golgiocB);
         if(sommaArray(golgiocA)==totale_casa && sommaArray(golgiocB)==totale_ospiti)
         {
-            db.collection("partite").document(id).update("risultato",totale_casa+"-"+totale_ospiti)
+            db.collection("partite").document(id).update("risultato",totale_casa+"-"+totale_ospiti,
+                                                                    "golgioc", Arrays.asList(golgioc))
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -44,11 +49,12 @@ public class DataSave {
                     {
                         MainActivity.CaricaPartite();
                         MainActivity.CaricaUtenti();
-                        SavePlayer(golgiocA,golgiocB,teams,segno);
+                        SavePlayer(golgioc,teams,segno);
                         Thread background = new Thread() {
                             public void run() {
                                 try {sleep(3*1000);
                                     myDialog.dismiss();
+
                                 } catch (Exception e) {System.out.println("Problema nel caricamento main activity");
                                 }
                             }
@@ -67,20 +73,18 @@ public class DataSave {
 
     }
 
-    private void SavePlayer(Integer[] golgiocA, Integer[] golgiocB, ArrayList<String> teams,int segno) {
+    private void SavePlayer(Integer[] golgioc, ArrayList<String> teams,int segno) {
         db=FirebaseFirestore.getInstance();
         CollectionReference coll=db.collection("utenti");
-
         int index;
-        Integer[] golgioc= ArrayUtils.concat(golgiocA,golgiocB);
+
         for (DataList d: NewGameActivity.amici)
         {
             if(teams.contains(d.getUsername()))
             {
                 index=teams.indexOf(d.getUsername());
-                if((index<5 && segno==1) || ((index>5 && segno==2))) {
+                if((index<5 && segno==1) || ((index>4 && segno==2))) {
                     RegistraGiocatore(coll,"vittorie",d,golgioc[index]);
-
                 }
                 else if(segno==0){
                     RegistraGiocatore(coll,"pareggi",d,golgioc[index]);

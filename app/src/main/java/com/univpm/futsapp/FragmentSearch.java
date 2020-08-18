@@ -13,21 +13,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.univpm.futsapp.NewGame.NewGameActivity;
 
 public class FragmentSearch extends Fragment {
-    ListView lv;
+
     View view;
-    FirebaseListAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search,container,false);
-
         RecyclerView giocatori = (RecyclerView) view.findViewById(R.id.Rubrica);
         giocatori.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(view.getContext());

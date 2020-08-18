@@ -11,6 +11,8 @@ public class Matchlist {
     private String luogo;
     private int costo;
     private String risultato;
+    private Long[] golgioc;
+
 
     public Matchlist(ArrayList<String> teams, String data, String orario, String luogo, int costo, String risultato){
         this.teams=teams;
@@ -19,8 +21,8 @@ public class Matchlist {
         this.luogo=luogo;
         this.costo=costo;
         this.risultato=risultato;
-    }
 
+    }
     public String getData() {
         return data;
     }
@@ -62,4 +64,14 @@ public class Matchlist {
     public String getRisultato() {return risultato;}
 
     public void setRisultato(String risultato) {this.risultato = risultato;}
+
+    public Long[] getGolgioc() {
+        return golgioc;
+    }
+
+    public void setGolgioc(ArrayList<Long> golgioc) {this.golgioc= golgioc.toArray(new Long[0]);}
+
+    public String getgolCasa(){return risultato.substring(0, risultato.indexOf("-")).trim(); }
+
+    public String getgolOspite(){return risultato.substring(risultato.indexOf("-")+1).trim();}
 }

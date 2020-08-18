@@ -26,13 +26,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
         Navigator nav = new Navigator();
-        try{
-        if(MainActivity.daRegistrare.length==0)
-            view.findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE); }
-        catch (NullPointerException e)
-        {view.findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE); }
-
-
         view.findViewById(R.id.bGruppi).setOnClickListener(nav);
         view.findViewById(R.id.bStorico).setOnClickListener(nav);
         view.findViewById(R.id.bIdeeFuture).setOnClickListener(nav);
@@ -42,7 +35,8 @@ public class HomeFragment extends Fragment {
     }
 
 
-private class Navigator implements View.OnClickListener {
+
+    private class Navigator implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -55,9 +49,10 @@ private class Navigator implements View.OnClickListener {
                 show("visualizzo lo storico");
                 openHistory();
                 break;}
-            case R.id.bIdeeFuture:
+            case R.id.bIdeeFuture: {
                 show("open social");
-                break;
+                openClassifica();
+                break;}
             case R.id.bNuovaPartita: {
                 show("creiamo una nuova partita");
                 MainActivity.check=true;
@@ -87,6 +82,11 @@ private class Navigator implements View.OnClickListener {
 
 }
 
+    private void openClassifica() {
+        Intent intent = new Intent(getView().getContext(), Classifiche.class);
+        startActivity(intent);
+    }
+
     private void openInsert() {
             Intent intent = new Intent(getView().getContext(), InserisciRisultato.class);
             startActivity(intent);
@@ -96,4 +96,6 @@ private class Navigator implements View.OnClickListener {
         Intent intent = new Intent(getView().getContext(), Storico.class);
         startActivity(intent);
     }
+
+
 }

@@ -28,7 +28,6 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.fragment_card_item, parent, false);
-
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }

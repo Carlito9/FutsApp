@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextStyleBNV">
+            <item name="android:textSize">20sp</item>
+            <item name="android:padding">0dp</item>
+            <item name="textAllCaps">true</item>
+    </style>
+
 </resources>

@@ -9,20 +9,22 @@ import android.os.Bundle;
 import java.util.ArrayList;
 
 public class InserisciRisultato extends AppCompatActivity {
-
-
+    RecyclerView.LayoutManager lManager;
+    RecyclerView insRis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inserisci_risultato);
-        RecyclerView insRis = (RecyclerView) findViewById(R.id.InserisciRisultato);
+        insRis = (RecyclerView) findViewById(R.id.InserisciRisultato);
         insRis.setHasFixedSize(true);
-        RecyclerView.LayoutManager lManager = new LinearLayoutManager(this);
-        RecyclerView.Adapter mAdapter = new ListaInserisciRisultato(MainActivity.daRegistrare,this);
-        insRis.setAdapter(mAdapter);
-        insRis.setLayoutManager(lManager);
-
+        CreaFragment();
     }
 
 
+    private void CreaFragment() {
+        lManager = new LinearLayoutManager(this);
+        RecyclerView.Adapter mAdapter = new ListaInserisciRisultato(MainActivity.daRegistrare,this);
+        insRis.setAdapter(mAdapter);
+        insRis.setLayoutManager(lManager);
+    }
 }

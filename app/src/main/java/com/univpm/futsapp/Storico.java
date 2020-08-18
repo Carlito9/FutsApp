@@ -15,7 +15,7 @@ public class Storico extends AppCompatActivity {
         RecyclerView storico = (RecyclerView) findViewById(R.id.Storico);
         storico.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(this);
-        RecyclerView.Adapter mAdapter = new ListaNotifiche(MainActivity.giocate,this);
+        RecyclerView.Adapter mAdapter = new ListaStorico(MainActivity.giocate,this);
         storico.setAdapter(mAdapter);
         storico.setLayoutManager(lManager);
     }

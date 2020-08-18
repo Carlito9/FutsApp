@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.univpm.futsapp.utilities.DataSave;
 
+import java.util.ArrayList;
+
 public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisciRisultato.ViewHolder>{
     private Matchlist[] listdata;
     private Dialog myDialog;
@@ -26,6 +28,7 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
     public ListaInserisciRisultato(Matchlist[] listdata, Context context){
         this.listdata=listdata;
         myDialog=new Dialog(context);
+
     }
     @NonNull
     @Override
@@ -38,9 +41,10 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ListaInserisciRisultato.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ListaInserisciRisultato.ViewHolder holder, final int position) {
         final Matchlist lista = listdata[position];
         myDialog.setContentView(R.layout.popup_inserisci);
+
         holder.capo.setText(String.format("organizzatore: %s", lista.getTeams().get(0)));
         holder.data.setText(String.valueOf(lista.getData()));
         holder.luogo.setText(String.valueOf(lista.getLuogo()));
@@ -99,6 +103,8 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
                         {
                             Toast.makeText(myDialog.getContext(), "Riempire tutti i campi per favore", Toast.LENGTH_SHORT).show();
                         }
+                        //rimuoviElemento(listdata,position);
+                        holder.cardView.setVisibility(View.GONE);
                     }
                 });
                 txtclose.setOnClickListener(new View.OnClickListener() {
@@ -111,8 +117,6 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
                 myDialog.show();
             }
         });
-
-
 
 
     }
@@ -143,7 +147,17 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
         }
     }
 
+   /* private void rimuoviElemento(Matchlist[] listdata, int position) {
+        for(int i=position+1; i<listdata.length;i++)
+            swap(listdata[i],listdata[i-1]);
+    }*/
 
+    private void swap(Matchlist a, Matchlist b) {
+        Matchlist temp;
+        temp=a;
+        a=b;
+        b=temp;
+    }
 
 
 }

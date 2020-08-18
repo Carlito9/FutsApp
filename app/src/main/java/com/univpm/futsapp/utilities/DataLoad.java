@@ -71,7 +71,7 @@ public class DataLoad {
                 //db.collection("partite").document(String.valueOf(y)).collection(String.valueOf(y)).document(String.valueOf(month)).collection(String.valueOf(month)).document(String.valueOf(day)).collection(String.valueOf(day))
                         //.whereEqualTo("giocatore" + temp, user)
 
-            q=db.collection("partite").whereArrayContains("giocatori", user);
+            q=db.collection("partite").whereArrayContains("giocatori", user).orderBy("data", Query.Direction.ASCENDING);
 
                     q.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -85,15 +85,17 @@ public class DataLoad {
                                             dafare.add(a);
                                         else if(a.getTeams().get(0).equals(user) && a.getRisultato().equals(document.getId()))
                                             daregistrare.add(a);
-                                        else if(!a.getRisultato().equals(document.getId()))
+                                        else if(!a.getRisultato().equals(document.getId())) {
+                                            a.setGolgioc((ArrayList<Long>) document.getData().get("golgioc"));
                                             giocate.add(a);
+                                        }
                                     }
                                 } else {
                                     System.out.println("Error getting documents: " + task.getException());
                                 }
-                                MainActivity.daFare = dafare.toArray(new Matchlist[0]);
-                                MainActivity.giocate=giocate.toArray(new Matchlist[0]);
-                                MainActivity.daRegistrare = daregistrare.toArray(new Matchlist[0]);
+                                MainActivity.daFare= dafare.toArray(new Matchlist[0]);
+                                MainActivity.giocate= giocate.toArray(new Matchlist[0]);
+                                MainActivity.daRegistrare= daregistrare.toArray(new Matchlist[0]);
                             }
                         });
 
