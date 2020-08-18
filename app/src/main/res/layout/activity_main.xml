@@ -9,7 +9,7 @@
     android:id="@+id/drawer"
     android:background="@color/c1"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Main.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

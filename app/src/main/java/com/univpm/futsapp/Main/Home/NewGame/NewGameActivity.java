@@ -1,4 +1,4 @@
-package com.univpm.futsapp.NewGame;
+package com.univpm.futsapp.Main.Home.NewGame;
 //"?android:attr/listPreferredItemHeightLarge"
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,20 +21,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.univpm.futsapp.MainActivity;
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
-
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import static com.univpm.futsapp.MainActivity.players;
 
 public class NewGameActivity extends AppCompatActivity   {
 

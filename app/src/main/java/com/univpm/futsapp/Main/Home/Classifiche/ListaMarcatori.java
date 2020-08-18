@@ -1,11 +1,6 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.Classifiche;
 
 import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.univpm.futsapp.NewGame.DataList;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 
 class ListaMarcatori extends RecyclerView.Adapter<ListaMarcatori.ViewHolder> {

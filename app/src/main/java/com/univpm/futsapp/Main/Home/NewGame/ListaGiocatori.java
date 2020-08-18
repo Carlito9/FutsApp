@@ -1,4 +1,4 @@
-package com.univpm.futsapp.NewGame;
+package com.univpm.futsapp.Main.Home.NewGame;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 import java.util.Set;
 

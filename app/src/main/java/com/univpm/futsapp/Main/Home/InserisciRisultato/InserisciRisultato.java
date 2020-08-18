@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.InserisciRisultato;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import java.util.ArrayList;
+import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.R;
 
 public class InserisciRisultato extends AppCompatActivity {
     RecyclerView.LayoutManager lManager;

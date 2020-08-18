@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.Classifiche;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,10 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.univpm.futsapp.NewGame.DataList;
-import com.univpm.futsapp.NewGame.NewGameActivity;
-
-import java.util.ArrayList;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 public class FragmentClassifica extends Fragment {
     private Context con;

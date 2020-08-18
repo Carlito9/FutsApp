@@ -1,4 +1,4 @@
-package com.univpm.futsapp.utilities;
+package com.univpm.futsapp.utilities.data;
 
 import androidx.annotation.NonNull;
 
@@ -9,11 +9,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.univpm.futsapp.FragmentContact;
-import com.univpm.futsapp.MainActivity;
-import com.univpm.futsapp.Matchlist;
-import com.univpm.futsapp.NewGame.DataList;
-import com.univpm.futsapp.NewGame.NewGameActivity;
+import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
+import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;

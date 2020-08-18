@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.Storico;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,12 +7,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
 
 
 public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> {

@@ -1,7 +1,6 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.Classifiche;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.univpm.futsapp.NewGame.DataList;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 class ListaClassifica extends RecyclerView.Adapter<ListaClassifica.ViewHolder> {
     private DataList[] classifica;

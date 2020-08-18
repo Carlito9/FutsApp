@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.InserisciRisultato;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,10 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.univpm.futsapp.utilities.DataSave;
-
-import java.util.ArrayList;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.data.DataSave;
+import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
 
 public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisciRisultato.ViewHolder>{
     private Matchlist[] listdata;

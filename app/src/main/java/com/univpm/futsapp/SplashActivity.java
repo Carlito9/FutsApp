@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
-import static com.univpm.futsapp.MainActivity.CaricaPartite;
-import static com.univpm.futsapp.MainActivity.CaricaUtenti;
+import com.univpm.futsapp.Main.MainActivity;
+
+import static com.univpm.futsapp.Main.MainActivity.CaricaPartite;
+import static com.univpm.futsapp.Main.MainActivity.CaricaUtenti;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

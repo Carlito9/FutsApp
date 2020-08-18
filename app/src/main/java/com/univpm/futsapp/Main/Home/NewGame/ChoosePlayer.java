@@ -1,4 +1,4 @@
-package com.univpm.futsapp.NewGame;
+package com.univpm.futsapp.Main.Home.NewGame;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.univpm.futsapp.MainActivity;
 import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 import java.util.HashSet;
 import java.util.Set;

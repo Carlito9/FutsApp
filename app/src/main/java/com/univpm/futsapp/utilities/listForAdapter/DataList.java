@@ -1,4 +1,4 @@
-package com.univpm.futsapp.NewGame;
+package com.univpm.futsapp.utilities.listForAdapter;
 
 import java.util.Map;
 

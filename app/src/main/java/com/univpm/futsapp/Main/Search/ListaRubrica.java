@@ -1,5 +1,6 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Search;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,23 +9,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.univpm.futsapp.NewGame.DataList;
-import com.univpm.futsapp.NewGame.ListaGiocatori;
-
-import java.util.Set;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>{
     private DataList[] listdata;
     Context context;
+    private Dialog myDialog;
 
 
     // RecyclerView recyclerView;
     public ListaRubrica(DataList[] listdata,Context context) {
         this.listdata = listdata;
         this.context=context;
+        myDialog=new Dialog(context);
      }
 
     @NonNull
@@ -33,18 +33,18 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.fragment_rubrica_item, parent, false);
         ListaRubrica.ViewHolder viewHolder = new ListaRubrica.ViewHolder(listItem);
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ListaRubrica.ViewHolder holder, final int position) {
         final DataList lista = listdata[position];
+        myDialog.setContentView(R.layout.popup_giocatore);
 
         holder.username.setText(lista.getUsername());
         holder.rating.setText(String.valueOf(lista.getRating()));
 
-        };
+        }
 
 
 

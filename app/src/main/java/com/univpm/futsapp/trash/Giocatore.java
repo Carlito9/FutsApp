@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.trash;
 
 public class Giocatore {
     private String studentID;
