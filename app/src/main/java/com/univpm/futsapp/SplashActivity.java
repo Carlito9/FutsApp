@@ -10,7 +10,6 @@ import static com.univpm.futsapp.MainActivity.CaricaPartite;
 import static com.univpm.futsapp.MainActivity.CaricaUtenti;
 
 public class SplashActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

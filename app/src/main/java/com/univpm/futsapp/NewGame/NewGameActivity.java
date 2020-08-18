@@ -146,7 +146,6 @@ public class NewGameActivity extends AppCompatActivity   {
         partita.put("luogo",luogo);
         //partita.put("data", day+"-"+(month+1)+"-"+y)
         partita.put("data", y*10000+(month+1)*100+day);
-
         partita.put("ora", time);
         partita.put("risultato", "no");
         if(!teamA[4].equals("0") && !teamB[4].equals("0"))
@@ -157,9 +156,7 @@ public class NewGameActivity extends AppCompatActivity   {
         catch(Exception e){
             Toast.makeText(NewGameActivity.this, "Riempire tutti i campi", Toast.LENGTH_SHORT).show();
         }
-
     }
-
     void Salva(final Map<String,Object> match) {
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         try {
@@ -173,10 +170,13 @@ public class NewGameActivity extends AppCompatActivity   {
             match.put("giocatori", Arrays.asList(ArrayUtils.concat(teamA,teamB)));
 
             final DocumentReference docRef = db.collection("partite").document();
+            match.put("risultato", docRef.getId());
             docRef.set(match).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        MainActivity.CaricaPartite();
+                        MainActivity.CaricaUtenti();
                         Toast.makeText(NewGameActivity.this, "Salvato", Toast.LENGTH_SHORT).show();
                         finish();
                     } else

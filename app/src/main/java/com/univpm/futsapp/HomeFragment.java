@@ -2,6 +2,8 @@ package com.univpm.futsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
         Navigator nav = new Navigator();
+        try{
+        if(MainActivity.daRegistrare.length==0)
+            view.findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE); }
+        catch (NullPointerException e)
+        {view.findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE); }
+
 
         view.findViewById(R.id.bGruppi).setOnClickListener(nav);
         view.findViewById(R.id.bStorico).setOnClickListener(nav);
@@ -39,31 +47,31 @@ private class Navigator implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bGruppi:
+                MainActivity.check=true;
                 show("visualizzo i gruppi");
+                openInsert();
                 break;
-            case R.id.bStorico:
+            case R.id.bStorico: {
                 show("visualizzo lo storico");
-                break;
+                openHistory();
+                break;}
             case R.id.bIdeeFuture:
                 show("open social");
                 break;
             case R.id.bNuovaPartita: {
                 show("creiamo una nuova partita");
-                MainActivity.check=false;
+                MainActivity.check=true;
                 openNewGame();
-                break;
-                }
+                break;}
             case R.id.bProssimoEvento:
                 show("il prossimo evento è...");
                 openNext();
                 break;
-            default:
-                show("non dovrebbe succedere");
         }
 
     }
 
-    public void openNewGame() {
+    private void openNewGame() {
         Intent intent = new Intent(getView().getContext(), NewGameActivity.class);
         startActivity(intent);
     }
@@ -78,4 +86,14 @@ private class Navigator implements View.OnClickListener {
     }
 
 }
+
+    private void openInsert() {
+            Intent intent = new Intent(getView().getContext(), InserisciRisultato.class);
+            startActivity(intent);
+    }
+
+    private void openHistory() {
+        Intent intent = new Intent(getView().getContext(), Storico.class);
+        startActivity(intent);
+    }
 }
