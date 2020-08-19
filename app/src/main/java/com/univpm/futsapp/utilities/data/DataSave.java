@@ -113,4 +113,6 @@ public class DataSave {
         db=FirebaseFirestore.getInstance();
         db.collection("utenti").document(user).update("amici",nomi);
     }
+
+
 }

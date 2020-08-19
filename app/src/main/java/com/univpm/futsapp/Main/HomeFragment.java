@@ -43,12 +43,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void CheckMatch(Navigator nav) {
-            if (MainActivity.daRegistrare.length !=0)
+        try {
+            if (MainActivity.daRegistrare.length != 0)
                 InserisciRis.setOnClickListener(nav);
-            if (MainActivity.daRegistrare.length !=1)
+            if (MainActivity.daRegistrare.length != 1)
                 InserisciRis.setText("Hai " + MainActivity.daRegistrare.length + " risultati da inserire");
             else
                 InserisciRis.setText("Hai " + MainActivity.daRegistrare.length + " risultato da inserire");
+        }
+        catch (NullPointerException e){
+            InserisciRis.setText("Hai 0 risultati da inserire");
+        }
     }
 
 
