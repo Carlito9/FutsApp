@@ -43,7 +43,6 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
     public void onBindViewHolder(@NonNull final ListaInserisciRisultato.ViewHolder holder, final int position) {
         final Matchlist lista = listdata[position];
         myDialog.setContentView(R.layout.popup_inserisci);
-
         holder.capo.setText(String.format("organizzatore: %s", lista.getTeams().get(0)));
         holder.data.setText(String.valueOf(lista.getData()));
         holder.luogo.setText(String.valueOf(lista.getLuogo()));
@@ -102,8 +101,10 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
                         {
                             Toast.makeText(myDialog.getContext(), "Riempire tutti i campi per favore", Toast.LENGTH_SHORT).show();
                         }
-                        //rimuoviElemento(listdata,position);
+
                         holder.cardView.setVisibility(View.GONE);
+                        scorri(position);
+
                     }
                 });
                 txtclose.setOnClickListener(new View.OnClickListener() {
@@ -146,17 +147,16 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
         }
     }
 
-   /* private void rimuoviElemento(Matchlist[] listdata, int position) {
-        for(int i=position+1; i<listdata.length;i++)
-            swap(listdata[i],listdata[i-1]);
-    }*/
-
-    private void swap(Matchlist a, Matchlist b) {
-        Matchlist temp;
-        temp=a;
-        a=b;
-        b=temp;
+    private void scorri(int pos) {
+       Matchlist temp;
+        for(int i=pos+1;i<listdata.length;i++)
+        {
+            temp=listdata[i-1];
+            listdata[i-1]=listdata[i];
+            listdata[i]=temp;
+        }
     }
+
 
 
 }

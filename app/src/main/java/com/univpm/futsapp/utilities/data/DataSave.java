@@ -107,4 +107,9 @@ public class DataSave {
             somma+=i;
         return somma;
     }
+
+    public void SaveFriends(ArrayList<String> nomi, String user) {
+        db=FirebaseFirestore.getInstance();
+        db.collection("utenti").document(user).update("amici",nomi);
+    }
 }

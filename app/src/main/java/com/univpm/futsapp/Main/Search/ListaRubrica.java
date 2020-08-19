@@ -2,17 +2,24 @@ package com.univpm.futsapp.Main.Search;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.data.DataSave;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
+
+import java.util.ArrayList;
 
 public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>{
     private DataList[] listdata;
@@ -39,13 +46,65 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
     @Override
     public void onBindViewHolder(final ListaRubrica.ViewHolder holder, final int position) {
         final DataList lista = listdata[position];
+        boolean visited=false;
         myDialog.setContentView(R.layout.popup_giocatore);
 
         holder.username.setText(lista.getUsername());
         holder.rating.setText(String.valueOf(lista.getRating()));
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final boolean check;
+                TextView txtclose=myDialog.findViewById(R.id.txtclose);
+                TextView username=myDialog.findViewById(R.id.username);
+                TextView giocate=myDialog.findViewById(R.id.giocate);
+                TextView vinte=myDialog.findViewById(R.id.vinte);
+                TextView pareggiate=myDialog.findViewById(R.id.pareggiate);
+                TextView perse=myDialog.findViewById(R.id.perse);
+                TextView gol=myDialog.findViewById(R.id.gol);
+                final Switch amici=myDialog.findViewById(R.id.amici);
+                final ArrayList<String> nomi=(ArrayList<String>)lista.getDati().get("amici");
+                System.out.println(nomi.get(0));
+                if(nomi.contains(MainActivity.username)) {
+                    amici.setChecked(true);
+                    check=true;
+                }
+                else {
+                    amici.setChecked(false);
+                    check=false;
+                }
 
+                username.setText(lista.getUsername());
+                giocate.setText(String.valueOf(lista.getDati().get("partite giocate")));
+                vinte.setText(String.valueOf(lista.getDati().get("vittorie")));
+                pareggiate.setText(String.valueOf(lista.getDati().get("pareggi")));
+                perse.setText(String.valueOf(lista.getDati().get("sconfitte")));
+                gol.setText(String.valueOf(lista.getDati().get("gol fatti")));
+                txtclose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(amici.isChecked() && !check)
+                        {
+                            nomi.add(MainActivity.username);
+                            lista.setAmici(nomi);
+                            new DataSave().SaveFriends(nomi,lista.getUsername());
+                        }
+                        else if(!amici.isChecked() && check)
+                        {
+                            nomi.remove(MainActivity.username);
+                            lista.setAmici(nomi);
+                            new DataSave().SaveFriends(nomi,lista.getUsername());
+                        }
+                        myDialog.dismiss();
+
+                    }
+
+                });
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.show();
+            }
+        });
         }
-
 
 
     @Override
@@ -66,7 +125,5 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
 
         }
 
-
     }
-
 }

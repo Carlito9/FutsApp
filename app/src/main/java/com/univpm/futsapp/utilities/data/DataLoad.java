@@ -113,6 +113,7 @@ public class DataLoad {
                         if (task.isSuccessful())
                         {
                             nomi= (ArrayList<String>) task.getResult().get("amici");
+
                             for(DataList d: lista)
                                 {
                                     if(nomi.contains(d.getUsername()))

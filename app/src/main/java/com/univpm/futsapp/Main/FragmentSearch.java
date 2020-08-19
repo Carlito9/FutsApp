@@ -31,7 +31,6 @@ public class FragmentSearch extends Fragment {
         view = inflater.inflate(R.layout.fragment_search,container,false);
 
         giocatori = (RecyclerView) view.findViewById(R.id.Rubrica);
-        Crearecycle (MainActivity.players);
         searchbutton = view.findViewById(R.id.searchbutton);
         searchtext = view.findViewById(R.id.searchtext);
         searchbutton.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +59,10 @@ public class FragmentSearch extends Fragment {
     private void Filtrarisultati(String nome) {
         ArrayList <DataList> giocatori = new ArrayList<>();
         for (DataList d : MainActivity.players) {
-            if (d.getUsername().contains(nome))
+            if (d.getUsername().contains(nome) && !d.getUsername().equals(MainActivity.username))
                 giocatori.add(d);
         }
-         Crearecycle(giocatori.toArray(new DataList[0]) );
+         Crearecycle(giocatori.toArray(new DataList[0]));
     }
 
 
