@@ -27,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.univpm.futsapp.Profile;
 import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.loginRegistration.LoginActivity;
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
-        CheckBadge();
+        //  CheckBadge();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
@@ -145,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
     public void onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.profile:
+                Intent intent = new Intent(MainActivity.this, Profile.class);
+                startActivity(intent);
                 Toast.makeText(MainActivity.this, "Profile Selected", Toast.LENGTH_LONG).show();
                 break;
             case R.id.contact:
