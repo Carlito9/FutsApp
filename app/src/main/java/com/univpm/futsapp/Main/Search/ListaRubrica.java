@@ -46,7 +46,6 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
     @Override
     public void onBindViewHolder(final ListaRubrica.ViewHolder holder, final int position) {
         final DataList lista = listdata[position];
-        boolean visited=false;
         myDialog.setContentView(R.layout.popup_giocatore);
 
         holder.username.setText(lista.getUsername());
@@ -64,7 +63,6 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
                 TextView gol=myDialog.findViewById(R.id.gol);
                 final Switch amici=myDialog.findViewById(R.id.amici);
                 final ArrayList<String> nomi=(ArrayList<String>)lista.getDati().get("amici");
-                System.out.println(nomi.get(0));
                 if(nomi.contains(MainActivity.username)) {
                     amici.setChecked(true);
                     check=true;

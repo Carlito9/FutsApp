@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
-        //  CheckBadge();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
@@ -139,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
             TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
             slotEmail.setText(email);
         }
-        CheckBadge();
     }
 
 
@@ -204,12 +202,5 @@ public class MainActivity extends AppCompatActivity {
         background.start();
     }
 
-    public void CheckBadge() {
-            try{
-                if (daRegistrare.length == 0)
-                findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE);
-        } catch (NullPointerException e) {
-                findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE);
-        }
-    }
+
 }

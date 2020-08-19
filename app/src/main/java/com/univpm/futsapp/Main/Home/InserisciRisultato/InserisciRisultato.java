@@ -22,7 +22,7 @@ public class InserisciRisultato extends AppCompatActivity {
     }
 
 
-    private void CreaFragment() {
+    public void CreaFragment() {
         lManager = new LinearLayoutManager(this);
         RecyclerView.Adapter mAdapter = new ListaInserisciRisultato(MainActivity.daRegistrare,this);
         insRis.setAdapter(mAdapter);

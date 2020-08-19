@@ -30,15 +30,15 @@
         app:layout_constraintStart_toEndOf="@+id/bNuovaPartita"
         app:layout_constraintTop_toBottomOf="@id/bStorico" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/bGruppi"
-            app:layout_constraintBottom_toTopOf="@+id/bNuovaPartita"
-            app:layout_constraintEnd_toStartOf="@+id/bStorico"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bProssimoEvento"
-            android:text="Inserisci Risultato" />
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/bGruppi"
+        app:layout_constraintBottom_toTopOf="@+id/bNuovaPartita"
+        app:layout_constraintEnd_toStartOf="@+id/bStorico"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bProssimoEvento"
+        android:text="Nessun Risultato da inserire" />
 
 
 
@@ -63,13 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:backgroundTint="@color/red"
-        app:layout_constraintEnd_toStartOf="@id/bStorico"
-        app:layout_constraintTop_toTopOf="@id/bGruppi" />
+
 
 
 

@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.univpm.futsapp.Main.Home.InserisciRisultato.InserisciRisultato;
 import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
@@ -50,8 +51,8 @@ public class DataSave {
                             public void run() {
                                 try {sleep(3*1000);
                                     myDialog.dismiss();
-
-                                } catch (Exception e) {System.out.println("Problema nel caricamento main activity");
+                                    new InserisciRisultato().CreaFragment();
+                                } catch (Exception e) {System.out.println("Problema nel salvataggio");
                                 }
                             }
                         };

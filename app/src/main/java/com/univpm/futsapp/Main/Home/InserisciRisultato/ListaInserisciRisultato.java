@@ -102,8 +102,6 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
                             Toast.makeText(myDialog.getContext(), "Riempire tutti i campi per favore", Toast.LENGTH_SHORT).show();
                         }
 
-                        holder.cardView.setVisibility(View.GONE);
-                        scorri(position);
 
                     }
                 });
