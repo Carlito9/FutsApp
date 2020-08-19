@@ -1,22 +1,18 @@
-package com.univpm.futsapp.utilities;
+package com.univpm.futsapp.utilities.data;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.univpm.futsapp.InserisciRisultato;
-import com.univpm.futsapp.MainActivity;
-import com.univpm.futsapp.NewGame.DataList;
-import com.univpm.futsapp.NewGame.NewGameActivity;
-import com.univpm.futsapp.SplashActivity;
+import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
+import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,5 +106,10 @@ public class DataSave {
         for (Integer i:arr)
             somma+=i;
         return somma;
+    }
+
+    public void SaveFriends(ArrayList<String> nomi, String user) {
+        db=FirebaseFirestore.getInstance();
+        db.collection("utenti").document(user).update("amici",nomi);
     }
 }

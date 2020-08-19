@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.trash;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.lang.annotation.Documented;
+import com.univpm.futsapp.R;
 
 public class NextActivity extends AppCompatActivity {
 

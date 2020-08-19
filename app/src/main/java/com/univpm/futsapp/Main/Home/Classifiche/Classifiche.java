@@ -1,17 +1,15 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.Classifiche;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.univpm.futsapp.NewGame.DataList;
-import com.univpm.futsapp.NewGame.NewGameActivity;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
+import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
 import java.util.Arrays;
 

@@ -1,15 +1,11 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,20 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.univpm.futsapp.NewGame.DataList;
-import com.univpm.futsapp.NewGame.NewGameActivity;
+import com.univpm.futsapp.Main.Search.ListaRubrica;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
+import com.univpm.futsapp.R;
 
 import java.util.ArrayList;
 
 public class FragmentSearch extends Fragment {
-    ListView lv;
     View view;
-    FirebaseListAdapter adapter;
     ImageButton searchbutton;
     EditText searchtext;
-
     RecyclerView giocatori;
 
     @Nullable
@@ -39,7 +31,6 @@ public class FragmentSearch extends Fragment {
         view = inflater.inflate(R.layout.fragment_search,container,false);
 
         giocatori = (RecyclerView) view.findViewById(R.id.Rubrica);
-        Crearecycle (MainActivity.players);
         searchbutton = view.findViewById(R.id.searchbutton);
         searchtext = view.findViewById(R.id.searchtext);
         searchbutton.setOnClickListener(new View.OnClickListener() {
@@ -68,10 +59,10 @@ public class FragmentSearch extends Fragment {
     private void Filtrarisultati(String nome) {
         ArrayList <DataList> giocatori = new ArrayList<>();
         for (DataList d : MainActivity.players) {
-            if (d.getUsername().contains(nome))
+            if (d.getUsername().contains(nome) && !d.getUsername().equals(MainActivity.username))
                 giocatori.add(d);
         }
-         Crearecycle(giocatori.toArray(new DataList[0]) );
+         Crearecycle(giocatori.toArray(new DataList[0]));
     }
 
 

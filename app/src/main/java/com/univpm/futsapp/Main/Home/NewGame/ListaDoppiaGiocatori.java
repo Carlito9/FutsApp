@@ -1,4 +1,4 @@
-package com.univpm.futsapp.NewGame;
+package com.univpm.futsapp.Main.Home.NewGame;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,8 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.univpm.futsapp.R;
-
-import java.util.Map;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHolder> {
         private DataList[] listdata=new DataList[5];

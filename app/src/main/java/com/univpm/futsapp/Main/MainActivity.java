@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main;
 
 
 
@@ -10,25 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 
-import android.app.Dialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,11 +27,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.univpm.futsapp.NewGame.DataList;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.loginRegistration.LoginActivity;
-import com.univpm.futsapp.utilities.DataLoad;
-
-
+import com.univpm.futsapp.utilities.data.DataLoad;
+import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -66,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CheckBadge();
             //riempie array giocatori
         aggiorna();
         check=true;
@@ -107,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
-
+        CheckBadge();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
@@ -213,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CheckBadge() {
-        try {
-            if (MainActivity.daRegistrare.length == 0)
+            try{
+                if (daRegistrare.length == 0)
                 findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE);
         } catch (NullPointerException e) {
                 findViewById(R.id.floatingActionButton).setVisibility(View.INVISIBLE);

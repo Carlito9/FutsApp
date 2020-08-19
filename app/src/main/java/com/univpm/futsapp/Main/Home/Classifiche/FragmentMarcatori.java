@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.Home.Classifiche;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.univpm.futsapp.NewGame.DataList;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 
 public class FragmentMarcatori extends androidx.fragment.app.Fragment {

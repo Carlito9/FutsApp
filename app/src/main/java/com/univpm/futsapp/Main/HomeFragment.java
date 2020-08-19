@@ -1,9 +1,7 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.univpm.futsapp.NewGame.NewGameActivity;
+import com.univpm.futsapp.Main.Home.Classifiche.Classifiche;
+import com.univpm.futsapp.Main.Home.InserisciRisultato.InserisciRisultato;
+import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
+import com.univpm.futsapp.trash.NextActivity;
+import com.univpm.futsapp.R;
+import com.univpm.futsapp.Main.Home.Storico.Storico;
 
 
 public class HomeFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.utilities.listForAdapter;
 
 import android.content.Context;
 

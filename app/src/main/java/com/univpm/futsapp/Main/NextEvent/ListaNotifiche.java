@@ -1,4 +1,4 @@
-package com.univpm.futsapp;
+package com.univpm.futsapp.Main.NextEvent;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,12 +7,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
+import com.univpm.futsapp.R;
 
 
 public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHolder> {

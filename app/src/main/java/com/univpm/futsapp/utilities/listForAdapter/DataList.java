@@ -1,5 +1,6 @@
-package com.univpm.futsapp.NewGame;
+package com.univpm.futsapp.utilities.listForAdapter;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class DataList {
@@ -31,4 +32,9 @@ public class DataList {
     }
     public Map<String, Object> getDati() {return dati;}
     public void setDati(Map<String, Object> dati) {this.dati = dati;}
+    public void setAmici(ArrayList<String> nomi) {
+        Map<String,Object> m=getDati();
+        m.remove("amici");
+        m.put("amici", nomi);
+    }
 }
