@@ -1,6 +1,8 @@
 package com.univpm.futsapp.utilities.data;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -10,17 +12,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.univpm.futsapp.Main.Home.InserisciRisultato.InserisciRisultato;
 import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.Profile;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
 public class DataSave {
         private FirebaseFirestore db;
+        private StorageReference StorageRef;
     public void SaveMatch(int totale_casa, int totale_ospiti, final Integer[] golgiocA, final Integer[] golgiocB, final ArrayList<String> teams, final Dialog myDialog, String id) {
         db=FirebaseFirestore.getInstance();
         final int segno;
@@ -53,6 +62,7 @@ public class DataSave {
                                     myDialog.dismiss();
                                     new InserisciRisultato().CreaFragment();
                                 } catch (Exception e) {System.out.println("Problema nel salvataggio");
+                                    e.printStackTrace();
                                 }
                             }
                         };
@@ -115,4 +125,14 @@ public class DataSave {
     }
 
 
+    public void saveImage(Uri imageData, final Context con) {
+        StorageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference ref=StorageRef.child("images/"+MainActivity.username);
+        ref.putFile(imageData).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                Toast.makeText(con, "Salvata", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

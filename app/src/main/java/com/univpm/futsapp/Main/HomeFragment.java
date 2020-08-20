@@ -25,27 +25,39 @@ public class HomeFragment extends Fragment {
     View view;
     Context con;
     Button InserisciRis;
-
+    Navigator nav = new Navigator();
+    boolean verifica=false;
     HomeFragment(Context con) {con= this.con;}
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
 
-        Navigator nav = new Navigator();
+
         view.findViewById(R.id.bStorico).setOnClickListener(nav);
         view.findViewById(R.id.bIdeeFuture).setOnClickListener(nav);
         view.findViewById(R.id.bNuovaPartita).setOnClickListener(nav);
         view.findViewById(R.id.bProssimoEvento).setOnClickListener(nav);
         InserisciRis=view.findViewById(R.id.bGruppi);
-        CheckMatch(nav);
+        verifica=CheckMatch(nav);
         return view;
     }
 
-    private void CheckMatch(Navigator nav) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        verifica=CheckMatch(nav);
+    }
+
+    private boolean CheckMatch(Navigator nav) {
+        boolean a=false;
         try {
             if (MainActivity.daRegistrare.length != 0)
+            {
                 InserisciRis.setOnClickListener(nav);
+                a=true;
+            }
+
             if (MainActivity.daRegistrare.length != 1)
                 InserisciRis.setText("Hai " + MainActivity.daRegistrare.length + " risultati da inserire");
             else
@@ -53,7 +65,9 @@ public class HomeFragment extends Fragment {
         }
         catch (NullPointerException e){
             InserisciRis.setText("Hai 0 risultati da inserire");
+            return false;
         }
+        return a;
     }
 
 
@@ -62,9 +76,12 @@ public class HomeFragment extends Fragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bGruppi:
-                MainActivity.check=true;
-                show("visualizzo i gruppi");
-                openInsert();
+                if(verifica)
+                {
+                    MainActivity.check=true;
+                    show("visualizzo i gruppi");
+                    openInsert();
+                }
                 break;
             case R.id.bStorico: {
                 show("visualizzo lo storico");
@@ -86,6 +103,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
 
     private void openNewGame() {
         Intent intent = new Intent(getView().getContext(), NewGameActivity.class);

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.data.DataSave;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 class ListaClassifica extends RecyclerView.Adapter<ListaClassifica.ViewHolder> {
@@ -57,7 +59,6 @@ class ListaClassifica extends RecyclerView.Adapter<ListaClassifica.ViewHolder> {
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final boolean check;
                 TextView txtclose=myDialog.findViewById(R.id.txtclose);
                 TextView username=myDialog.findViewById(R.id.username);
                 TextView giocate=myDialog.findViewById(R.id.giocate);
@@ -65,7 +66,11 @@ class ListaClassifica extends RecyclerView.Adapter<ListaClassifica.ViewHolder> {
                 TextView pareggiate=myDialog.findViewById(R.id.pareggiate);
                 TextView perse=myDialog.findViewById(R.id.perse);
                 TextView gol=myDialog.findViewById(R.id.gol);
+                ImageView imageView=myDialog.findViewById(R.id.profilePic);
 
+                try {MainActivity.LoadImage.LoadImage(lista.getUsername(),imageView); } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 username.setText(lista.getUsername());
                 giocate.setText(String.valueOf(lista.getDati().get("partite giocate")));
                 vinte.setText(String.valueOf(lista.getDati().get("vittorie")));

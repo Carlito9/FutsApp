@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.data.DataSave;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>{
@@ -62,6 +64,11 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
                 TextView perse=myDialog.findViewById(R.id.perse);
                 TextView gol=myDialog.findViewById(R.id.gol);
                 final Switch amici=myDialog.findViewById(R.id.amici);
+                ImageView imageView=myDialog.findViewById(R.id.profilePic);
+                try {
+                    MainActivity.LoadImage.LoadImage(lista.getUsername(),imageView); } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 final ArrayList<String> nomi=(ArrayList<String>)lista.getDati().get("amici");
                 if(nomi.contains(MainActivity.username)) {
                     amici.setChecked(true);

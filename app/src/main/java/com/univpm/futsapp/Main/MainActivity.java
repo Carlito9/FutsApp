@@ -19,6 +19,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.loginRegistration.LoginActivity;
 import com.univpm.futsapp.utilities.data.DataLoad;
 import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
+
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,17 +56,17 @@ public class MainActivity extends AppCompatActivity {
     public static Matchlist[] daFare;
     public static Matchlist[] giocate;
     public static Matchlist[] daRegistrare;
+    public static DataLoad LoadImage=new DataLoad();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-            //riempie array giocatori
+        //riempie array giocatori
         aggiorna();
         check=true;
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(this)).commit();
         }
@@ -72,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
-
                 switch (item.getItemId()) {
-
                     case R.id.house:
                         fragment = new HomeFragment(MainActivity.this);
                         break;
@@ -102,14 +103,19 @@ public class MainActivity extends AppCompatActivity {
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toogle);
         toogle.syncState();
+
+        ImageView profilePic=headerView.findViewById(R.id.profilePic);
+        try {LoadImage.LoadImage(username,profilePic); }
+        catch (IOException e) {e.printStackTrace();}
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent getCredentials) {
         super.onActivityResult(requestCode, resultCode, getCredentials);
         if (requestCode == LOGIN_REQUEST) {
-            if (resultCode == RESULT_OK) {
-
+            if (resultCode == RESULT_OK)
+            {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 username=currentUser.getDisplayName();
                 CaricaPartite();
@@ -118,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putBoolean("firstrun", false);
                 editor.putString("user",username);
                 editor.apply();
-                            }
+            }
             else if(resultCode== RESULT_CANCELED)
                 finish();
         }

@@ -23,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.utilities.data.DataLoad;
 import com.univpm.futsapp.utilities.data.DataSave;
 
 import java.io.ByteArrayOutputStream;
@@ -32,17 +33,20 @@ public class Profile extends AppCompatActivity {
     private static final int GALLERY_REQUEST_CODE = 123;
     ImageView imageView;
     Button buttonimage;
-    FirebaseStorage storage;
-    private StorageReference StorageRef;
 
+
+    private DataSave SaveImage=new DataSave();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        StorageRef = FirebaseStorage.getInstance().getReference();
+
         imageView = findViewById(R.id.profilePic);
         buttonimage = findViewById(R.id.buttonimage);
+        try {MainActivity.LoadImage.LoadImage(MainActivity.username,imageView); } catch (IOException e) {
+            e.printStackTrace();
+        }
         buttonimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,19 +64,9 @@ public class Profile extends AppCompatActivity {
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri imageData = data.getData();
             imageView.setImageURI(imageData);
-            saveImage(imageData);
-
+            SaveImage.saveImage(imageData,Profile.this);
         }
     }
 
-    private void saveImage(Uri imageData) {
-        StorageReference ref=StorageRef.child("images/"+MainActivity.username);
-        ref.putFile(imageData).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                Toast.makeText(Profile.this, "fatto", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
 }

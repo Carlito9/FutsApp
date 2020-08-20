@@ -1,5 +1,10 @@
 package com.univpm.futsapp.utilities.data;
 
+import android.content.Context;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -9,14 +14,25 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.Viewed;
 import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class DataLoad {
     FirebaseFirestore db;
@@ -25,7 +41,7 @@ public class DataLoad {
     List<Matchlist> giocate=new ArrayList<>();
     List<Matchlist> dafare=new ArrayList<>();
     List<Matchlist> daregistrare=new ArrayList<>();
-
+    Set<Viewed> viewed= new HashSet<>();
     public DataLoad()
     {
         db=FirebaseFirestore.getInstance();
@@ -53,12 +69,7 @@ public class DataLoad {
 
 
     public DataLoad(final String user) {
-        /*String temp;
-        for (int i = 0; i < 10; i++) {
-            if(i<5)
-                temp="A"+i;
-            else
-                temp="B"+i;*/
+
             Calendar calendario;
             calendario= Calendar.getInstance();
             final int day=calendario.get(Calendar.DAY_OF_MONTH);
@@ -66,9 +77,6 @@ public class DataLoad {
             final int y=calendario.get(Calendar.YEAR);
             Query q;
             db = FirebaseFirestore.getInstance();
-
-                //db.collection("partite").document(String.valueOf(y)).collection(String.valueOf(y)).document(String.valueOf(month)).collection(String.valueOf(month)).document(String.valueOf(day)).collection(String.valueOf(day))
-                        //.whereEqualTo("giocatore" + temp, user)
 
             q=db.collection("partite").whereArrayContains("giocatori", user).orderBy("data", Query.Direction.ASCENDING);
 
@@ -99,6 +107,29 @@ public class DataLoad {
                         });
 
 
+    }
+
+    public void LoadImage(final String user, final ImageView img) throws IOException {
+        for(Viewed v:viewed) {
+            if (v.getNome().equals(user)) {
+                img.setImageURI(v.getUri());
+                return;
+            }
+        }
+
+            final File localFile = File.createTempFile(user, ".jpg");
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("images/" + user);
+            storageRef.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        Uri imageData = Uri.fromFile(localFile);
+                        img.setImageURI(imageData);
+                        Viewed v=new Viewed(imageData, user);
+                        viewed.add(v);
+                    }
+                }
+            });
     }
 
     private void CaricaAmici(String user)

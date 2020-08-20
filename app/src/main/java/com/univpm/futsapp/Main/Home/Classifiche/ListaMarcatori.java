@@ -7,14 +7,18 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
+
+import java.io.IOException;
 
 
 class ListaMarcatori extends RecyclerView.Adapter<ListaMarcatori.ViewHolder> {
@@ -32,6 +36,7 @@ class ListaMarcatori extends RecyclerView.Adapter<ListaMarcatori.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.fragment_classifica_item, parent, false);
+
         return new ViewHolder(listItem);
     }
 
@@ -48,12 +53,13 @@ class ListaMarcatori extends RecyclerView.Adapter<ListaMarcatori.ViewHolder> {
         else
             holder.posiz.setText(String.valueOf(position+1));
 
+
         holder.punteggio.setText(String.valueOf(lista.getDati().get("gol fatti")));
         holder.username.setText(lista.getUsername());
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final boolean check;
+
                 TextView txtclose=myDialog.findViewById(R.id.txtclose);
                 TextView username=myDialog.findViewById(R.id.username);
                 TextView giocate=myDialog.findViewById(R.id.giocate);
@@ -62,6 +68,12 @@ class ListaMarcatori extends RecyclerView.Adapter<ListaMarcatori.ViewHolder> {
                 TextView perse=myDialog.findViewById(R.id.perse);
                 TextView gol=myDialog.findViewById(R.id.gol);
 
+                ImageView imageView=myDialog.findViewById(R.id.profilePic);
+
+                try {
+                    MainActivity.LoadImage.LoadImage(lista.getUsername(),imageView); } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 username.setText(lista.getUsername());
                 giocate.setText(String.valueOf(lista.getDati().get("partite giocate")));
                 vinte.setText(String.valueOf(lista.getDati().get("vittorie")));

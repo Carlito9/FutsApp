@@ -84,33 +84,32 @@ public class Register extends AppCompatActivity {
     private void InsertUser(String username, final FirebaseUser utente) {
         final Map<String, Object> user = new HashMap<>();
         user.put("username", username);
-        user.put("partite giocate",0);
-        user.put("vittorie",0);
-        user.put("pareggi",0);
-        user.put("sconfitte",0);
-        user.put("gol fatti",0);
-        user.put("rating",60);
+        user.put("partite giocate", 0);
+        user.put("vittorie", 0);
+        user.put("pareggi", 0);
+        user.put("sconfitte", 0);
+        user.put("gol fatti", 0);
         user.put("amici", Arrays.asList(username));
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("utenti").document(username).set(user)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful())
-                {
-                    Toast.makeText(Register.this, "Registrazione completata", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-                else {
-                    Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
-                    utente.delete();
+        if (!db.collection("utenti").document(username).get().isSuccessful()) {
+            db.collection("utenti").document(username).set(user)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Register.this, "Registrazione completata", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            } else {
+                                Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
+                                utente.delete();
 
-                }
-            }
-        });
+                            }
+                        }
+                    });
+        } else Toast.makeText(Register.this, "Nome già esistente", Toast.LENGTH_SHORT).show();
     }
 }
