@@ -19,7 +19,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/c1"
+        android:background="@drawable/bkg_2"
         app:layout_constraintTop_toTopOf="parent" />
     
     <FrameLayout
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/c3"
+            android:background="@drawable/bkg_2"
             app:menu="@menu/menu" />
 
 

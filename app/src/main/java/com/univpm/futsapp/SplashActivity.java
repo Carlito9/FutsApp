@@ -16,7 +16,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         MainActivity.preferences = getSharedPreferences("login", MODE_PRIVATE);
         MainActivity.username=MainActivity.preferences.getString("user","nnn");
         CaricaUtenti();

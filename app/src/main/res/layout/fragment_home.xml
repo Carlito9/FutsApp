@@ -5,52 +5,104 @@
     android:layout_width="match_parent"
     tools:openDrawer="end"
     android:id="@+id/drawer"
-    android:background="@color/c1"
+    android:background="@drawable/background_default"
     android:layout_height="match_parent"
     tools:context=".Main.MainActivity"
     >
 
-    <Button
-        android:text="nuova partita"
-        android:id="@+id/bNuovaPartita"
+    <RelativeLayout
+        android:id="@+id/cont_new_match"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/bIdeeFuture"
+        app:layout_constraintEnd_toStartOf="@id/cont_classifica"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bGruppi" />
+        app:layout_constraintTop_toBottomOf="@id/cont_inserisci" >
 
     <Button
-        android:id="@+id/bIdeeFuture"
+        android:id="@+id/bNuovaPartita"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_storico"
+        android:fontFamily="@font/bungee_inline"
+        android:padding="10dp"
+        android:text="nuova partita"
+        android:textColor="@color/azzurro"
+        android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Social"
+        android:id="@+id/cont_classifica"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bNuovaPartita"
-        app:layout_constraintTop_toBottomOf="@id/bStorico" />
-
+        app:layout_constraintStart_toEndOf="@id/cont_new_match"
+        app:layout_constraintTop_toBottomOf="@id/cont_storico">
     <Button
+        android:id="@+id/bIdeeFuture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_storico"
+        android:fontFamily="@font/bungee_inline"
+        android:padding="10dp"
+        android:text="Classifiche"
+        android:textColor="@color/azzurro"
+        android:textSize="18sp"
+ />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/bGruppi"
-        app:layout_constraintBottom_toTopOf="@+id/bNuovaPartita"
-        app:layout_constraintEnd_toStartOf="@+id/bStorico"
+        android:id="@+id/cont_inserisci"
+        app:layout_constraintBottom_toTopOf="@id/cont_new_match"
+        app:layout_constraintEnd_toStartOf="@id/cont_storico"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bProssimoEvento"
-        android:text="Nessun Risultato da inserire" />
+        app:layout_constraintTop_toBottomOf="@id/bProssimoEvento">
 
+    <Button
+        android:id="@+id/bGruppi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_storico"
+        android:fontFamily="@font/bungee_inline"
+        android:padding="10dp"
+        android:text="Nessun Risultato da inserire"
+        android:textColor="@color/azzurro"
+        android:textSize="18sp"
+        />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/cont_storico"
+        app:layout_constraintBottom_toTopOf="@+id/cont_classifica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cont_inserisci"
+        app:layout_constraintTop_toBottomOf="@id/bProssimoEvento">
 
     <Button
         android:id="@+id/bStorico"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_storico"
+        android:fontFamily="@font/bungee_inline"
+        android:padding="10dp"
         android:text="Storico"
-        app:layout_constraintBottom_toTopOf="@+id/bIdeeFuture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bGruppi"
-        app:layout_constraintTop_toBottomOf="@id/bProssimoEvento" />
+        android:textColor="@color/azzurro"
+        android:textSize="18sp"
+        />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/bProssimoEvento"
@@ -58,7 +110,7 @@
         android:layout_height="0dp"
         android:background="@drawable/football"
         android:text="Prossimo evento"
-        app:layout_constraintBottom_toTopOf="@+id/bGruppi"
+        app:layout_constraintBottom_toTopOf="@id/cont_inserisci"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

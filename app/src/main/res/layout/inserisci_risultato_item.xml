@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/cardLayout">
+    android:id="@+id/cardLayout"
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -18,12 +19,14 @@
             android:layout_height="match_parent">
 
             <TextView
+
                 android:id="@+id/Luogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
+
+                android:textSize="20sp"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
 

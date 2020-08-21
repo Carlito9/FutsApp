@@ -3,13 +3,15 @@
     <color name="colorPrimary">#65c69d</color>
     <color name="colorPrimaryDark">#65c69d</color>
     <color name="colorAccent">#666f78</color>
-    <color name="c1">#65c69d</color>
+    <color name="c1">#ffff00</color>
     <color name="c2">#666f78</color>
     <color name="c3">#353e47</color>
     <color name="gold">#fdd017</color>
+    <color name="acqua_marina">#66cdaa</color>
+    <color name="silver">#c0c0c0</color>
     <color name="red">#F12213</color>
     <color name="black">#000000</color>
-
+    <color name="azzurro">#07a4f3</color>
 
 </resources>
 

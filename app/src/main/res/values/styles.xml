@@ -3,9 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/azzurro</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="TextStyleBNV">
@@ -27,8 +28,15 @@
         </item>
     </style>
 
-    <style name="Theme.CircularButton" parent="Widget.AppCompat.Button">
-        <item name="cornerRadius"> 1000dp</item>
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_slab</item>
+    </style>
 
+    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/roboto_slab</item>
+    </style>
+
+    <style name="RobotoEditTextStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/roboto_slab</item>
     </style>
 </resources>
