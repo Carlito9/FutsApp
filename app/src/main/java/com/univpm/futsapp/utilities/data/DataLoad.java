@@ -1,6 +1,7 @@
 package com.univpm.futsapp.utilities.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.SplashActivity;
 import com.univpm.futsapp.Viewed;
 import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
@@ -42,10 +44,18 @@ public class DataLoad {
     List<Matchlist> dafare=new ArrayList<>();
     List<Matchlist> daregistrare=new ArrayList<>();
     Set<Viewed> viewed= new HashSet<>();
-    public DataLoad()
-    {
-        db=FirebaseFirestore.getInstance();
+    Context con;
+    int conta=0;
+    public DataLoad(Context con)
+    {this.con=con;}
 
+    public DataLoad() {
+
+    }
+
+    public void LoadUserAndGo(){
+        db=FirebaseFirestore.getInstance();
+        final Intent intent=new Intent(con,MainActivity.class);
                         db.collection("utenti")
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -53,7 +63,7 @@ public class DataLoad {
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                                DataList a=new DataList((String)document.getData().get("username"),Integer.parseInt(String.valueOf(document.getData().get("rating"))),document.getData());
+                                                DataList a=new DataList((String)document.getData().get("username"),document.getData());
                                                 lista.add(a);
 
                                             }
@@ -63,15 +73,45 @@ public class DataLoad {
 
                                         MainActivity.players= lista.toArray(new DataList[0]);
                                         CaricaAmici(MainActivity.username);
+                                        if(conta==1)
+                                            con.startActivity(intent);
+                                        else
+                                            conta++;
+
                                     }
                                 });
+
     }
 
+    public void LoadUser(){
+        db=FirebaseFirestore.getInstance();
 
-    public DataLoad(final String user) {
+        db.collection("utenti")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                DataList a=new DataList((String)document.getData().get("username"),document.getData());
+                                lista.add(a);
+
+                            }
+                        } else {
+                            System.out.println("Error getting documents: " + task.getException());
+                        }
+
+                        MainActivity.players= lista.toArray(new DataList[0]);
+                    }
+                });
+
+    }
+
+    public void LoadMatchAndGo(final String user) {
 
             Calendar calendario;
             calendario= Calendar.getInstance();
+            final Intent intent=new Intent(con,MainActivity.class);
             final int day=calendario.get(Calendar.DAY_OF_MONTH);
             final int month=calendario.get(Calendar.MONTH)+1;
             final int y=calendario.get(Calendar.YEAR);
@@ -87,7 +127,7 @@ public class DataLoad {
                                     for (QueryDocumentSnapshot document : task.getResult())
                                     {
                                         ArrayList<String> giocatori= (ArrayList<String>) document.getData().get("giocatori");
-                                        Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(int)(long)document.getData().get("costo"),(String)document.getData().get("risultato"));
+                                        Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(String)document.getData().get("risultato"));
                                         if((int) (long)document.getData().get("data")>=(y*10000+(month)*100+day))
                                             dafare.add(a);
                                         else if(a.getTeams().get(0).equals(user) && a.getRisultato().equals(document.getId()))
@@ -103,8 +143,57 @@ public class DataLoad {
                                 MainActivity.daFare= dafare.toArray(new Matchlist[0]);
                                 MainActivity.giocate= giocate.toArray(new Matchlist[0]);
                                 MainActivity.daRegistrare= daregistrare.toArray(new Matchlist[0]);
+                                if(conta==1)
+                                {
+                                    con.startActivity(intent);
+                                }
+
+                                else
+                                    conta++;
                             }
                         });
+
+
+    }
+
+    public void LoadMatch(final String user) {
+
+        Calendar calendario;
+        calendario= Calendar.getInstance();
+        final int day=calendario.get(Calendar.DAY_OF_MONTH);
+        final int month=calendario.get(Calendar.MONTH)+1;
+        final int y=calendario.get(Calendar.YEAR);
+        Query q;
+        db = FirebaseFirestore.getInstance();
+
+        q=db.collection("partite").whereArrayContains("giocatori", user).orderBy("data", Query.Direction.ASCENDING);
+
+        q.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult())
+                    {
+                        ArrayList<String> giocatori= (ArrayList<String>) document.getData().get("giocatori");
+                        Matchlist a = new Matchlist(giocatori, ConvertData((int)(long)document.getData().get("data")), (String) document.getData().get("ora"), (String) document.getData().get("luogo"),(String)document.getData().get("risultato"));
+                        if((int) (long)document.getData().get("data")>=(y*10000+(month)*100+day))
+                            dafare.add(a);
+                        else if(a.getTeams().get(0).equals(user) && a.getRisultato().equals(document.getId()))
+                            daregistrare.add(a);
+                        else if(!a.getRisultato().equals(document.getId())) {
+                            a.setGolgioc((ArrayList<Long>) document.getData().get("golgioc"));
+                            giocate.add(a);
+                        }
+                    }
+                } else {
+                    System.out.println("Error getting documents: " + task.getException());
+                }
+                MainActivity.daFare= dafare.toArray(new Matchlist[0]);
+                MainActivity.giocate= giocate.toArray(new Matchlist[0]);
+                MainActivity.daRegistrare= daregistrare.toArray(new Matchlist[0]);
+
+            }
+        });
 
 
     }

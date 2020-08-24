@@ -9,17 +9,16 @@ public class Matchlist {
     private String data;
     private String orario;
     private String luogo;
-    private int costo;
+
     private String risultato;
     private Long[] golgioc;
 
 
-    public Matchlist(ArrayList<String> teams, String data, String orario, String luogo, int costo, String risultato){
+    public Matchlist(ArrayList<String> teams, String data, String orario, String luogo, String risultato){
         this.teams=teams;
         this.data=data;
         this.orario=orario;
         this.luogo=luogo;
-        this.costo=costo;
         this.risultato=risultato;
 
     }
@@ -53,12 +52,6 @@ public class Matchlist {
 
     public void setLuogo(String luogo) {
         this.luogo = luogo;
-    }
-
-    public int getCosto() {return costo;}
-
-    public void setCosto(int costo) {
-        this.costo = costo;
     }
 
     public String getRisultato() {return risultato;}

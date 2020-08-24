@@ -51,7 +51,7 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
         myDialog.setContentView(R.layout.popup_giocatore);
 
         holder.username.setText(lista.getUsername());
-        holder.rating.setText(String.valueOf(lista.getRating()));
+
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,13 +118,13 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView rating;
+
         TextView username;
         RelativeLayout relativeLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
-            this.rating = (TextView) itemView.findViewById(R.id.rating);
+
             this.username = (TextView) itemView.findViewById(R.id.uname);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
 

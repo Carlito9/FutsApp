@@ -7,14 +7,19 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
+
+import java.io.IOException;
 
 
 public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> {
@@ -39,7 +44,10 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
         public void onBindViewHolder(@NonNull final ListaStorico.ViewHolder holder, int position) {
             final Matchlist lista = listdata[position];
             myDialog.setContentView(R.layout.popup_vedi_risultato);
-            holder.capo.setText(String.format("organizzatore: %s", lista.getTeams().get(0)));
+            try {
+                MainActivity.LoadImage.LoadImage(lista.getTeams().get(0),holder.capo); } catch (IOException e) {
+                e.printStackTrace();
+            }
             holder.data.setText(String.valueOf(lista.getData()));
             holder.luogo.setText(String.valueOf(lista.getLuogo()));
             holder.orario.setText(String.valueOf(lista.getOrario()));
@@ -78,9 +86,9 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
                     data.setText(lista.getData());
                     stadio.setText(lista.getLuogo());
                     golCasa.setText(lista.getgolCasa());
-                    System.out.println("lista"+lista.getgolCasa());
+
                     golOspiti.setText(lista.getgolOspite());
-                    System.out.println("lista2222"+lista.getgolOspite());
+
                     txtclose.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -103,18 +111,18 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView capo;
+            ImageView capo;
             TextView luogo;
             TextView data;
             TextView orario;
-            CardView cardView;
+            LinearLayout cardView;
             ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                this.capo = (TextView) itemView.findViewById(R.id.capo);
+                this.capo = (ImageView) itemView.findViewById(R.id.capo);
                 this.data = (TextView) itemView.findViewById(R.id.Data);
                 this.luogo = (TextView) itemView.findViewById(R.id.Luogo);
                 this.orario = (TextView) itemView.findViewById(R.id.Orario);
-                this.cardView= (CardView) itemView.findViewById(R.id.card_view);
+                this.cardView= (LinearLayout) itemView.findViewById(R.id.card_view);
             }
         }
 

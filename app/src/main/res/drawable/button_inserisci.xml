@@ -4,7 +4,7 @@
     <solid android:color="@color/c3" />
 
     <stroke
-        android:color="@android:color/white"
+        android:color="#f0ffff"
         android:width="6dp"
         />
     <gradient

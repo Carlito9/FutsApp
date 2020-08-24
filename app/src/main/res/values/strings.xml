@@ -19,4 +19,5 @@
     <string name="ospiti">OSPITI</string>
     <string name="euro">€</string>
     <string name="futsapp">FutsApp</string>
+    <string name="please_connect_to_internet">Connetti ad internet per favore</string>
 </resources>

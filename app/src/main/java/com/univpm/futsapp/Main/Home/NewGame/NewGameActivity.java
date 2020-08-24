@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
+import com.univpm.futsapp.utilities.data.DataLoad;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
 
@@ -36,21 +38,22 @@ public class NewGameActivity extends AppCompatActivity   {
 
     EditText Luogo,Costo;
 
-    TimePicker Orario;
+    TextView Orario;
+    //TimePicker Orario;
     TextView Data;
     RecyclerView giocatoriA;
     RecyclerView giocatoriB;
     RecyclerView.LayoutManager lManager;
     RecyclerView.Adapter mAdapter;
     Calendar mCurrentDate;
-    int day,month,y;
+
+    int day,month,y,h,min;
     String time;
     public static DataList[] amici;
 
 
     String[] teamA={"0","0","0","0","0"};
     String[] teamB={"0","0","0","0","0"};
-    //Set<String> chosen= new HashSet<>();
 
 
     public static final int  CHOOSE_PLAYER= 103;
@@ -65,15 +68,15 @@ public class NewGameActivity extends AppCompatActivity   {
 
 
         Luogo=(EditText)findViewById(R.id.Luogo);
-        Costo=(EditText)findViewById(R.id.Costo);
         Data=(TextView)findViewById(R.id.Data);
-        Orario=(TimePicker)findViewById(R.id.Orario);
 
+       // Orario=(TimePicker)findViewById(R.id.Orario);
+        Orario=findViewById(R.id.Orario);
 
         giocatoriA = (RecyclerView) findViewById(R.id.SquadraA);
-        FragSetter(teamA,giocatoriA);
+        FragSetter(teamA,giocatoriA,R.layout.fragment_list_item);
         giocatoriB = (RecyclerView) findViewById(R.id.SquadraB);
-        FragSetter(teamB,giocatoriB);
+        FragSetter(teamB,giocatoriB,R.layout.fragment_list_item_b);
 
 
         mCurrentDate = Calendar.getInstance();
@@ -81,6 +84,11 @@ public class NewGameActivity extends AppCompatActivity   {
         day=mCurrentDate.get(Calendar.DAY_OF_MONTH);
         month=mCurrentDate.get(Calendar.MONTH);
         y=mCurrentDate.get(Calendar.YEAR);
+        h=mCurrentDate.get(Calendar.HOUR_OF_DAY);
+        min=mCurrentDate.get(Calendar.MINUTE);
+
+        Data.setHint(day+"/"+(month+1)+"/"+y);
+        Orario.setHint(h+":"+min);
         Data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +106,19 @@ public class NewGameActivity extends AppCompatActivity   {
                 datePickerDialog.show();
             }
         });
+        Orario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(NewGameActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            h=hourOfDay;
+                            min=minute;
+                    }
+                },h,min , true);
+                timePickerDialog.show();
+            }
+        });
     }
 
 
@@ -111,14 +132,14 @@ public class NewGameActivity extends AppCompatActivity   {
             int i=1;
                 for(String s:temp)
                     teamA[i++]=s;
-                FragSetter(teamA,giocatoriA);
+                FragSetter(teamA,giocatoriA, R.layout.fragment_list_item);
             }
             else
                 {
                     int i=0;
                     for(String s:temp)
                         teamB[i++]=s;
-                    FragSetter(teamB,giocatoriB);
+                    FragSetter(teamB,giocatoriB, R.layout.fragment_list_item_b);
             }
 
         }
@@ -133,10 +154,7 @@ public class NewGameActivity extends AppCompatActivity   {
         int costo = Integer.parseInt(Costo.getText().toString().trim());
         //String data = Data.getText().toString().trim();
         String luogo = Luogo.getText().toString().trim();
-        if(Orario.getMinute()<10)
-            time= Orario.getHour() +":0"+Orario.getMinute();
-        else
-            time= Orario.getHour() +":"+Orario.getMinute();
+        time= (String) Orario.getText();
         partita.put("costo",costo);
         partita.put("luogo",luogo);
         //partita.put("data", day+"-"+(month+1)+"-"+y)
@@ -170,8 +188,7 @@ public class NewGameActivity extends AppCompatActivity   {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        MainActivity.CaricaPartite();
-                        MainActivity.CaricaUtenti();
+                        Carica();
                         Toast.makeText(NewGameActivity.this, "Salvato", Toast.LENGTH_SHORT).show();
                         finish();
                     } else
@@ -184,16 +201,19 @@ public class NewGameActivity extends AppCompatActivity   {
     }
 
 
-    public void FragSetter(String[] team, RecyclerView giocatori){
+    public void FragSetter(String[] team, RecyclerView giocatori, int layout){
         giocatori.setHasFixedSize(true);
         lManager = new LinearLayoutManager(this);
-
-        mAdapter = new ListaDoppiaGiocatori(amici,this,team);
+        mAdapter = new ListaDoppiaGiocatori(amici,this,team,layout);
         giocatori.setAdapter(mAdapter);
         giocatori.setLayoutManager(lManager);
 
     }
 
-
+    public void Carica(){
+        DataLoad d=new DataLoad();
+        d.LoadMatch(MainActivity.username);
+        d.LoadUser();
+    }
 
 }

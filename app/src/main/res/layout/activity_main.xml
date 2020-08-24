@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bkg_2"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
         app:layout_constraintTop_toTopOf="parent" />
     
     <FrameLayout
@@ -45,9 +46,9 @@
         android:id="@+id/navigationView"
         app:menu="@menu/menu_item"
         app:headerLayout="@layout/header"
-        android:background="@color/c2"
+        android:background="@color/azzurro"
         android:layout_gravity='start'
-        app:itemTextColor="@color/colorPrimary"/>
+        app:itemTextColor="@color/c1" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

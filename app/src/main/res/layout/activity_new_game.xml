@@ -12,70 +12,92 @@
     android:orientation="vertical"
     tools:context=".Main.Home.NewGame.NewGameActivity"
     android:padding="20dp"
-    android:background="@color/c1">
+    android:background="@drawable/background_default">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:id="@+id/DataOra">
+        <TextView
+            android:id="@+id/Data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:background="@drawable/border_text"
+            android:textAlignment="center"
+            android:textColor="#094ba3"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/Orario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#094ba3"
+            android:layout_marginHorizontal="10dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:background="@drawable/border_text"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/Luogo"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:hint="Luogo"
+        android:layout_marginTop="15dp"
+        android:textColor="#094ba3"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_text"
         android:textAlignment="center"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/Data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Costo"
-        android:hint="Data"
-        android:inputType="date"
-
-        android:textAlignment="textEnd"
-        android:textColor="@color/c3"
-        android:textSize="20sp" />
-
-    <TimePicker
-        android:id="@+id/Orario"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-
-        android:layout_below="@+id/Data"
-        android:layout_marginTop="8dp"
-
-        android:numbersSelectorColor="@color/c3"
-        android:timePickerMode="spinner" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Luogo"
-
         android:textSize="20sp"
-        android:hint="Costo"
+        android:layout_below="@id/DataOra"/>
 
-        android:textAlignment="center"
-        android:id="@+id/Costo"
-        android:inputType="number"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/nomiSquadre"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/Luogo"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="6sp"
-        android:text="@string/euro"
-        android:textAlignment="textEnd"
-        android:textColor="@color/c3"
-        android:textSize="24sp" />
+        android:layout_marginVertical="10dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/bungee_inline"
+            android:text="@string/casa"
+            android:textAlignment="center"
+            android:textColor="@color/gold"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/bungee_inline"
+            android:text="@string/ospiti"
+            android:textAlignment="center"
+            android:textColor="@color/gold"
+            android:textSize="30sp" />
+    </LinearLayout>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Orario"
+        android:layout_below="@id/nomiSquadre"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SquadraA"
@@ -87,27 +109,35 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SquadraB"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            tools:listitem="@layout/fragment_list_item" />
+            tools:listitem="@layout/fragment_list_item_b" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </RelativeLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/save"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
+        android:background="@drawable/floating_style"
         android:layout_margin="5dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="save"
-        app:backgroundTint="@android:color/holo_blue_light"
-        app:srcCompat="@android:drawable/ic_menu_save" />
+        android:backgroundTint="#daa520"
+        >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="save"
+            app:backgroundTint="@color/gold"
+            app:srcCompat="@android:drawable/ic_menu_save" />
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

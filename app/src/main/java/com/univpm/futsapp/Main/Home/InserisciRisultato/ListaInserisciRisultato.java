@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -134,14 +135,14 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
         TextView luogo;
         TextView data;
         TextView orario;
-        CardView cardView;
+        LinearLayout cardView;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.capo = (TextView) itemView.findViewById(R.id.capo);
             this.data = (TextView) itemView.findViewById(R.id.Data);
             this.luogo = (TextView) itemView.findViewById(R.id.Luogo);
             this.orario = (TextView) itemView.findViewById(R.id.Orario);
-            this.cardView= (CardView) itemView.findViewById(R.id.card_view);
+            this.cardView= (LinearLayout) itemView.findViewById(R.id.card_view);
         }
     }
 

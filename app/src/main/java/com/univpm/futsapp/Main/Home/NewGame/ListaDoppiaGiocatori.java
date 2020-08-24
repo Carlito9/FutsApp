@@ -19,18 +19,19 @@ public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.Vi
         private DataList[] listdata=new DataList[5];
         Context context;
         String[] squadra;
+        int layout;
 
 
         // RecyclerView recyclerView;
-        public ListaDoppiaGiocatori(DataList[] listdata,Context context, String[] squadra) {
+        public ListaDoppiaGiocatori(DataList[] listdata,Context context, String[] squadra, int layout) {
             this.context=context;
-
             this.squadra=squadra;
+            this.layout=layout;
             int i=0;
             for (String s:squadra){
                 if(s.equals("0"))
                 {
-                    this.listdata[i++]=new DataList("aggiungi giocatore", 0);
+                    this.listdata[i++]=new DataList("aggiungi");
                     continue;
                 }
                 for (DataList a:listdata){
@@ -47,7 +48,7 @@ public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.Vi
         @Override
         public ListaGiocatori.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View listItem = layoutInflater.inflate(R.layout.fragment_list_item, parent, false);
+            View listItem = layoutInflater.inflate(layout, parent, false);
             ListaGiocatori.ViewHolder viewHolder = new ListaGiocatori.ViewHolder(listItem);
             return viewHolder;
         }
@@ -56,8 +57,6 @@ public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.Vi
         public void onBindViewHolder(final ListaGiocatori.ViewHolder holder, final int position) {
             final DataList lista = listdata[position];
             holder.username.setText(lista.getUsername());
-            if(lista.getRating()!=0)
-            holder.rating.setText(String.valueOf(lista.getRating()));
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -78,13 +77,13 @@ public class ListaDoppiaGiocatori extends RecyclerView.Adapter<ListaGiocatori.Vi
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView rating;
+
             public TextView username;
             public RelativeLayout relativeLayout;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                this.rating = (TextView) itemView.findViewById(R.id.rating);
+
                 this.username = (TextView) itemView.findViewById(R.id.uname);
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
 

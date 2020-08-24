@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment(MainActivity.this);
                         break;
                     case R.id.contact:
-                        fragment = new FragmentContact();
+                        fragment = new FragmentNextEvent();
                         break;
                     case R.id.search:
                         fragment = new FragmentSearch();
@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
             {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 username=currentUser.getDisplayName();
-                CaricaPartite();
                 SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("firstrun", false);
@@ -180,11 +179,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static void CaricaPartite(){
-        new DataLoad(username);
-    }
-    public static void CaricaUtenti(){
-        new DataLoad();
+    public void Carica(){
+        DataLoad d=new DataLoad();
+        d.LoadMatch(MainActivity.username);
+        d.LoadUser();
     }
 
     private void aggiorna()
@@ -195,8 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         sleep(5*60*1000);
                         if (!check) {
-                            CaricaPartite();
-                            CaricaUtenti();
+                            Carica();
                         } else
                             check = false;
                     } catch (Exception e) {

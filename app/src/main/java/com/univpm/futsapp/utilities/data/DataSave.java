@@ -53,8 +53,7 @@ public class DataSave {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful())
                     {
-                        MainActivity.CaricaPartite();
-                        MainActivity.CaricaUtenti();
+                        Carica();
                         SavePlayer(golgioc,teams,segno);
                         Thread background = new Thread() {
                             public void run() {
@@ -134,5 +133,11 @@ public class DataSave {
                 Toast.makeText(con, "Salvata", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void Carica(){
+        DataLoad d=new DataLoad();
+        d.LoadMatch(MainActivity.username);
+        d.LoadUser();
     }
 }

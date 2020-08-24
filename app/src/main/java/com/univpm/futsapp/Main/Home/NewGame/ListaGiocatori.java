@@ -46,24 +46,21 @@ public class ListaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final DataList lista = listdata[position];
         if (chosen.contains(lista.getUsername())){
-            holder.relativeLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.gold));
+            holder.relativeLayout.setBackgroundResource(R.drawable.border_choose_clicked);
          }
         else {
-            //holder.relativeLayout.setBackgroundColor(Color.WHITE);
-            holder.relativeLayout.setBackgroundResource(R.drawable.border);
+            holder.relativeLayout.setBackgroundResource(R.drawable.border_choose_default);
         }
         holder.username.setText(lista.getUsername());
-        holder.rating.setText(String.valueOf(lista.getRating()));
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!chosen.contains(lista.getUsername())){
-                    holder.relativeLayout.setBackgroundColor(ContextCompat.getColor(context,R.color.gold));
+                    holder.relativeLayout.setBackgroundResource(R.drawable.border_choose_clicked);
                     chosen.add(lista.getUsername());
                 }
                 else {
-                    //holder.relativeLayout.setBackgroundColor(Color.WHITE);
-                    holder.relativeLayout.setBackgroundResource(R.drawable.border);
+                    holder.relativeLayout.setBackgroundResource(R.drawable.border_choose_default);
                     chosen.remove(lista.getUsername());
                 }
             }
@@ -77,13 +74,13 @@ public class ListaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView rating;
+
         TextView username;
         RelativeLayout relativeLayout;
 
         ViewHolder(View itemView) {
             super(itemView);
-            this.rating = (TextView) itemView.findViewById(R.id.rating);
+
             this.username = (TextView) itemView.findViewById(R.id.uname);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
 

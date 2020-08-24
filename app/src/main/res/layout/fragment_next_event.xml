@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     tools:context=".Main.MainActivity"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_default">
 
 
 
@@ -14,7 +15,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:id="@+id/Notifiche"
-        tools:listitem="@layout/fragment_card_item">
+        tools:listitem="@layout/fragment_partita_item">
 
 
     </androidx.recyclerview.widget.RecyclerView>

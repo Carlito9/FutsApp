@@ -7,21 +7,26 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
 import com.univpm.futsapp.R;
 
+import java.io.IOException;
 
-public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHolder> {
+
+public class ListaNextEvent extends RecyclerView.Adapter<ListaNextEvent.ViewHolder> {
     private Matchlist[] listdata;
     private Dialog myDialog;
 
-    public ListaNotifiche(Matchlist[] listdata, Context context){
+    public ListaNextEvent(Matchlist[] listdata, Context context){
         this.listdata=listdata;
         myDialog=new Dialog(context);
     }
@@ -29,7 +34,7 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.fragment_card_item, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.fragment_partita_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
@@ -38,7 +43,10 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final Matchlist lista = listdata[position];
         myDialog.setContentView(R.layout.popup_partite);
-        holder.capo.setText(String.format("organizzatore: %s", lista.getTeams().get(0)));
+        try {
+            MainActivity.LoadImage.LoadImage(lista.getTeams().get(0),holder.capo); } catch (IOException e) {
+            e.printStackTrace();
+        }
         holder.data.setText(String.valueOf(lista.getData()));
         holder.luogo.setText(String.valueOf(lista.getLuogo()));
         holder.orario.setText(String.valueOf(lista.getOrario()));
@@ -51,7 +59,6 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
                 TextView ora;
                 TextView data;
                 TextView stadio;
-                TextView costo;
                 txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
                 casa=(TextView[]) new TextView[]{myDialog.findViewById(R.id.playerA0), myDialog.findViewById(R.id.playerA1), myDialog.findViewById(R.id.playerA2), myDialog.findViewById(R.id.playerA3), myDialog.findViewById(R.id.playerA4)};
                 trasferta=(TextView[]) new TextView[]{myDialog.findViewById(R.id.playerB0), myDialog.findViewById(R.id.playerB1), myDialog.findViewById(R.id.playerB2), myDialog.findViewById(R.id.playerB3), myDialog.findViewById(R.id.playerB4)};
@@ -62,11 +69,11 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
                 ora= (TextView) myDialog.findViewById(R.id.oraPartita);
                 data= (TextView) myDialog.findViewById(R.id.date);
                 stadio= (TextView) myDialog.findViewById(R.id.stadio);
-                costo= (TextView) myDialog.findViewById(R.id.costoPartita);
+
                 ora.setText(lista.getOrario());
                 data.setText(lista.getData());
                 stadio.setText(lista.getLuogo());
-                costo.setText(String.valueOf(lista.getCosto()));
+
                 txtclose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -89,18 +96,18 @@ public class ListaNotifiche extends RecyclerView.Adapter<ListaNotifiche.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView capo;
+        ImageView capo;
         TextView luogo;
         TextView data;
         TextView orario;
-        CardView cardView;
+        LinearLayout cardView;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.capo = (TextView) itemView.findViewById(R.id.capo);
+            this.capo =  (ImageView) itemView.findViewById(R.id.capo);
             this.data = (TextView) itemView.findViewById(R.id.Data);
             this.luogo = (TextView) itemView.findViewById(R.id.Luogo);
             this.orario = (TextView) itemView.findViewById(R.id.Orario);
-            this.cardView= (CardView) itemView.findViewById(R.id.card_view);
+            this.cardView= (LinearLayout) itemView.findViewById(R.id.card_view);
         }
     }
 }
