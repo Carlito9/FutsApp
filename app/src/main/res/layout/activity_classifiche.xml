@@ -4,34 +4,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_default"
     tools:context=".Main.Home.Classifiche.Classifiche">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/c3"
-        android:id="@+id/topNav">
+        android:background="#fffacd"
+        android:id="@+id/topNav"
+        >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/textClassifica"
-            android:textSize="14sp"
+            android:textColor="@color/c3"
+            android:fontFamily="@font/audiowide"
             android:textAlignment="center"
-            android:padding="14dp"
-            android:text="CLASSIFICA"
-            android:onClick="navigaClassifica"/>
+            android:gravity="center"
+            android:text="VITTORIE"
+            android:onClick="navigaClassifica"
+            android:padding="14dp"/>
+
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="12dp"
+            android:background="@color/silver"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/textMarcatori"
-            android:textSize="14sp"
-            android:textAlignment="center"
+            android:textColor="@color/c3"
+            android:fontFamily="@font/audiowide"
+            android:gravity="center"
             android:padding="14dp"
+
             android:text="MARCATORI"
             android:onClick="navigaClassifica"/>
     </LinearLayout>

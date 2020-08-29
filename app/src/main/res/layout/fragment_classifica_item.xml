@@ -2,25 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="65dp"
     android:orientation="horizontal"
-    android:background="@drawable/border">
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="15dp"
+    android:background="@drawable/classifica_bkg">
 
     <LinearLayout
         android:id="@+id/medal_badge"
         android:layout_width="35dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginStart="20dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/position"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="6dp"
-            android:textAlignment="center"
+            android:fontFamily="@font/audiowide"
+            android:textColor="@color/silver"
+            android:gravity="center"
             android:layout_marginStart="5dp"
             android:textSize="25sp" />
 
@@ -31,17 +34,27 @@
         android:layout_marginStart="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fontFamily="@font/audiowide"
+        android:textColor="#008000"
         android:layout_weight="1"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/punteggio"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_marginEnd="30dp"
-        android:textAlignment="textEnd"
+        android:layout_weight="2"  >
+    <TextView
+        android:id="@+id/punteggio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/audiowide"
+        android:textColor="#008000"
         android:textSize="20sp" />
+    </RelativeLayout>
 
 </LinearLayout>

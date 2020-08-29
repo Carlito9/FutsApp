@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="350dp"
-    android:layout_height="475dp"
-    android:background="@color/c3"
+    android:layout_width="340dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_inserisci"
     android:padding="5dp"
+    android:scrollbars="vertical"
     android:layout_gravity="center">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -16,42 +18,47 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/c1"
-                android:textAlignment="center"
-
-                android:textSize="15sp"
-                android:id="@+id/date"/>
 
             <TextView
 
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/c1"
+                android:fontFamily="@font/audiowide"
                 android:textAlignment="center"
-                android:textSize="15sp"
-                android:id="@+id/oraPartita" />
+                android:textColor="@color/blu_scuro"
+                android:textSize="14sp" />
+
+            <TextView
+
+                android:id="@+id/oraPartita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/audiowide"
+                android:textAlignment="center"
+                android:textColor="@color/blu_scuro"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
-            android:layout_weight="1"
+            android:id="@+id/stadio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/stadio"
+            android:layout_weight="1"
+            android:fontFamily="@font/audiowide"
             android:padding="5dp"
-            android:textColor="@color/c1"
             android:textAlignment="textStart"
-            android:textSize="20sp"/>
+            android:textColor="@color/blu_scuro"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/txtclose"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="end"
+            android:layout_marginEnd="5dp"
             android:background="@android:drawable/ic_menu_close_clear_cancel"
-            android:backgroundTint="@color/c1"
+            android:backgroundTint="@color/red"
             android:gravity="center"
             android:textColor="@color/c1"
             android:textStyle="bold" />
@@ -74,64 +81,83 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/casa"
-                android:textSize="45sp"
-                android:textColor="@color/c1"
+                android:fontFamily="@font/bungee_inline"
+                android:textSize="32sp"
+                android:textColor="@color/gold"
                 android:textAlignment="center" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:textColor="@color/c1"
-                android:textAlignment="textEnd"
+                android:layout_marginEnd="5dp"
+                android:textSize="12sp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/audiowide"
                 android:text="gol"
-                android:layout_marginEnd="5dp"/>
+                android:textAlignment="textEnd"
+                android:textColor="@color/blu_scuro"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="0.25">
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/playerA0"
-                        android:textColor="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:paddingTop="5dp"
                         android:textAlignment="center"
-                        android:textSize="25sp"
-                        />
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
+
                     <TextView
 
+                        android:id="@+id/playerA1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/c1"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
                         android:textAlignment="center"
-                        android:textSize="25sp"
-                        android:id="@+id/playerA1"/>
+                        android:paddingTop="5dp"
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/playerA2"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"/>
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
+
+                    <TextView
                         android:id="@+id/playerA3"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"/>
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/playerA4"
-                        android:textColor="@color/c1"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
                         android:textAlignment="center"
-                        android:textSize="25sp"/>
+                        android:paddingTop="5dp"
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/playerA4"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -140,64 +166,69 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golA0"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golA1"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golA2"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golA3"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golA4"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -207,69 +238,93 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/ospiti"
-                android:textSize="45sp"
-                android:textColor="@color/c1"
+                android:fontFamily="@font/bungee_inline"
+                android:textSize="32sp"
+                android:textColor="@color/gold"
                 android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:textColor="@color/c1"
-                android:textAlignment="textEnd"
+                android:layout_marginEnd="23dp"
+                android:textSize="12sp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/audiowide"
                 android:text="gol"
-                android:layout_marginEnd="5dp"/>
+                android:textAlignment="textEnd"
+                android:textColor="@color/blu_scuro"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="0.25">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"
-                        android:id="@+id/playerB0"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/playerB1"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"
-                        android:id="@+id/playerB2"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"
-                        android:id="@+id/playerB3"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/playerB4"
-                        android:textColor="@color/c1"
-                        android:textAlignment="center"
-                        android:textSize="25sp"/>
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/playerB0"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:textColor="@color/azzurro"
+                        android:paddingTop="5dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/playerB1"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:textColor="@color/azzurro"
+                        android:paddingTop="5dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/playerB2"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:textColor="@color/azzurro"
+                        android:paddingTop="5dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/playerB3"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:id="@+id/playerB4"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/audiowide"
+                        android:textAlignment="center"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/azzurro"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -277,64 +332,70 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golB0"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golB1"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golB2"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
+
                         android:id="@+id/golB3"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
 
                     <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="0"
-                        android:hint="0"
                         android:id="@+id/golB4"
-                        android:background="@color/c1"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginVertical="2dp"
+                        android:autofillHints="0"
+                        android:textSize="20sp"
+                        android:hint="0"
+                        android:background="@drawable/text_box"
                         android:inputType="number"
-                        android:padding="5dp"
                         android:textAlignment="center"
-                        android:textColor="@color/c3"/>
+                        android:textColor="@color/blu_scuro"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -343,15 +404,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="30dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
-        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="40dp"
+            android:paddingTop="30dp"
+            android:paddingEnd="40dp"
+            android:paddingBottom="15dp">
 
             <EditText
                 android:id="@+id/golCasa"
@@ -361,23 +423,25 @@
                 android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:autofillHints="0"
-                android:background="@color/c1"
-                android:inputType="number"
-                android:padding="5dp"
-                android:textAlignment="center"
-                android:textColor="@color/c3"
-                android:textSize="45sp"
+                android:background="@drawable/text_box"
+                android:fontFamily="@font/bungee_inline"
                 android:hint="0"
-                />
+
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="@color/gold"
+                android:textSize="35sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:textColor="@color/c1"
-                android:textSize="45sp"
                 android:padding="5dp"
+                android:text="-"
+                android:fontFamily="@font/bungee_inline"
                 android:textAlignment="center"
-                android:text="-"/>
+                android:textColor="@color/gold"
+                android:textSize="35sp" />
 
             <EditText
                 android:id="@+id/golOspite"
@@ -387,13 +451,13 @@
                 android:layout_marginEnd="20dp"
                 android:layout_weight="1"
                 android:autofillHints="0"
-                android:background="@color/c1"
+                android:background="@drawable/text_box"
+                android:fontFamily="@font/bungee_inline"
+                android:hint="0"
                 android:inputType="number"
-                android:padding="5dp"
                 android:textAlignment="center"
-                android:textColor="@color/c3"
-                android:textSize="45sp"
-                android:hint="0"/>
+                android:textColor="@color/gold"
+                android:textSize="35sp" />
 
 
         </LinearLayout>
@@ -405,8 +469,10 @@
             android:text="salva"
             android:id="@+id/regPartita"
             android:textAlignment="center"
-            android:background="@color/c1"
-            android:layout_marginBottom="5dp"/>
+            android:background="@drawable/border_button"
+            android:fontFamily="@font/audiowide"
+            android:textColor="@color/red"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
 

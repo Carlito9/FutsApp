@@ -13,7 +13,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.loginRegistration.Register;
 import com.univpm.futsapp.utilities.data.DataLoad;
 
 
@@ -24,27 +27,34 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         MainActivity.preferences = getSharedPreferences("login", MODE_PRIVATE);
-        MainActivity.username=MainActivity.preferences.getString("user","nnn");
-        if(CheckConnection()) {
-            //Intent i=new Intent(SplashActivity.this,MainActivity.class);
-            Carica();
 
-            Thread background = new Thread() {
-                public void run() {
-                    try {
-                        sleep(10 * 1000);
-                    /*
-                    Intent i=new Intent(SplashActivity.this,MainActivity.class);
-                    if(connected)
-                        startActivity(i);*/
-                        System.out.println("ciaooooooooo");
-                        finish();
-                    } catch (Exception e) {
-                        System.out.println("Problema nel caricamento main activity");
+        if(CheckConnection()) {
+            if (MainActivity.preferences.getBoolean("firstrun", true)) {
+                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            } else {
+                MainActivity.username = MainActivity.preferences.getString("user", "nnn");
+                //Intent i=new Intent(SplashActivity.this,MainActivity.class);
+                Carica();
+                Thread background = new Thread() {
+                    public void run() {
+                        try {
+                            sleep(10 * 1000);
+                        /*
+                        Intent i=new Intent(SplashActivity.this,MainActivity.class);
+                        if(connected)
+                            startActivity(i);*/
+
+                            finish();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            System.out.println("Problema nel caricamento main activity");
+                        }
                     }
-                }
-            };
-            background.start();
+                };
+                background.start();
+            }
         }
         else
             finish();

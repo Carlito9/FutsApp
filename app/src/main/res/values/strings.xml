@@ -20,4 +20,5 @@
     <string name="euro">€</string>
     <string name="futsapp">FutsApp</string>
     <string name="please_connect_to_internet">Connetti ad internet per favore</string>
+    <string name="testo_about">Siamo tre ragazzi che frequentano l\'università Politecnica delle Marche. Questa app, valida come progetto d\'esame, è nata a seguito di una nostra riflessione su un problema di tutti i giorni, ovvero organizzare partite di calcetto. Spesso questo problema è di facile risoluzione utilizzando i gruppi messi a disposizione dalle app di messaggistica, tuttavia questi gruppi, per loro natura, tendono ad essere dispersivi e le comunicazioni si possono disperdere nel fiume di messaggi. Così abbiamo pensato di creare una piattaforma semplice e veloce che permettesse di organizzare partite scegliendo fra tutti i propri contatti. Ti auguriamo buon divertimento! </string>
 </resources>

@@ -13,6 +13,9 @@
     <color name="red">#F12213</color>
     <color name="black">#000000</color>
     <color name="azzurro">#07a4f3</color>
+    <color name="blu_scuro">#094ba3</color>
+    <color name="giallino">#fffc95</color>
+    <color name="giallone">#ffff00</color>
 
 </resources>
 

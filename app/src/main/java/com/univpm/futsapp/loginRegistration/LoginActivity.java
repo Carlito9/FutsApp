@@ -62,6 +62,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void registra(View view) {
+       lanciaReg();
+    }
+
+    private void lanciaReg() {
         Intent launchRegister = new Intent(LoginActivity.this, Register.class);
         startActivityForResult(launchRegister, REGISTER_REQUEST);
     }
@@ -81,6 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(RESULT_OK, intent);
                 finish();
             }
+            else if (RESULT_CANCELED==resultCode)
+                Toast.makeText(LoginActivity.this, "Connessione debole o assente", Toast.LENGTH_SHORT).show();
+                lanciaReg();
         }
     }
 }

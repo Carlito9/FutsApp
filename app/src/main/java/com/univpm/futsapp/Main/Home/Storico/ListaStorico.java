@@ -44,10 +44,15 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
         public void onBindViewHolder(@NonNull final ListaStorico.ViewHolder holder, int position) {
             final Matchlist lista = listdata[position];
             myDialog.setContentView(R.layout.popup_vedi_risultato);
-            try {
-                MainActivity.LoadImage.LoadImage(lista.getTeams().get(0),holder.capo); } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String golC = lista.getgolCasa();
+            String golO = lista.getgolOspite();
+            if((Long.parseLong(golC)>Long.parseLong(golO) && lista.getTeams().indexOf(MainActivity.username)<5) ||
+                    (Long.parseLong(golC)<Long.parseLong(golO) && lista.getTeams().indexOf(MainActivity.username)>4))
+                holder.cardView.setBackgroundResource(R.drawable.background_storico_vinta);
+            else if(Long.parseLong(golC)!=Long.parseLong(golO))
+                holder.cardView.setBackgroundResource(R.drawable.background_storico_persa);
+            holder.golCasa.setText(golC);
+            holder.golOspite.setText(golO);
             holder.data.setText(String.valueOf(lista.getData()));
             holder.luogo.setText(String.valueOf(lista.getLuogo()));
             holder.orario.setText(String.valueOf(lista.getOrario()));
@@ -86,7 +91,6 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
                     data.setText(lista.getData());
                     stadio.setText(lista.getLuogo());
                     golCasa.setText(lista.getgolCasa());
-
                     golOspiti.setText(lista.getgolOspite());
 
                     txtclose.setOnClickListener(new View.OnClickListener() {
@@ -111,14 +115,17 @@ public class ListaStorico extends RecyclerView.Adapter<ListaStorico.ViewHolder> 
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
-            ImageView capo;
+
+            TextView golCasa;
+            TextView golOspite;
             TextView luogo;
             TextView data;
             TextView orario;
             LinearLayout cardView;
             ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                this.capo = (ImageView) itemView.findViewById(R.id.capo);
+                this.golOspite = itemView.findViewById(R.id.golOspite);
+                this.golCasa=itemView.findViewById(R.id.golCasa);
                 this.data = (TextView) itemView.findViewById(R.id.Data);
                 this.luogo = (TextView) itemView.findViewById(R.id.Luogo);
                 this.orario = (TextView) itemView.findViewById(R.id.Orario);

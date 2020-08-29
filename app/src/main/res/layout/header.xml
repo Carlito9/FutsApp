@@ -26,11 +26,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/azzurro"
             android:text=""
-            android:textSize="20dp"
+            android:fontFamily="@font/audiowide"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -38,11 +39,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/azzurro"
+            android:fontFamily="@font/audiowide"
             android:text=""
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
 

@@ -18,6 +18,7 @@ import com.google.firebase.storage.UploadTask;
 import com.univpm.futsapp.Main.Home.InserisciRisultato.InserisciRisultato;
 import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.Profile;
+import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
@@ -55,9 +56,13 @@ public class DataSave {
                     {
                         Carica();
                         SavePlayer(golgioc,teams,segno);
-                        Thread background = new Thread() {
+                        Thread backg = new Thread() {
+                            Dialog caricamento=new Dialog(myDialog.getContext());
                             public void run() {
+                                caricamento.setContentView(R.layout.popup_loading);
+                                caricamento.show();
                                 try {sleep(3*1000);
+                                    caricamento.dismiss();
                                     myDialog.dismiss();
                                     new InserisciRisultato().CreaFragment();
                                 } catch (Exception e) {System.out.println("Problema nel salvataggio");
@@ -65,7 +70,7 @@ public class DataSave {
                                 }
                             }
                         };
-                        background.start();
+                        backg.start();
 
 
                     }

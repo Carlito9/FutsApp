@@ -27,9 +27,9 @@ public class Classifiche extends AppCompatActivity {
 
         textClassifica=findViewById(R.id.textClassifica);
         textMarcatori=findViewById(R.id.textMarcatori);
-        textClassifica.setTextSize(14);
-        textMarcatori.setTextSize(12);
-        textClassifica.setTextColor(getColor(R.color.c1));
+        textClassifica.setTextSize(16);
+        textMarcatori.setTextSize(14);
+        textClassifica.setTextColor(getColor(R.color.azzurro));
 
     }
 
@@ -53,10 +53,10 @@ public class Classifiche extends AppCompatActivity {
     }
 
     private void FormattaTesto(TextView a, TextView b) {
-        a.setTextSize(14);
-        b.setTextSize(12);
-        a.setTextColor(getColor(R.color.c1));
-        b.setTextColor(getColor(R.color.black));
+        a.setTextSize(16);
+        b.setTextSize(14);
+        a.setTextColor(getColor(R.color.azzurro));
+        b.setTextColor(getColor(R.color.c3));
 
     }
 

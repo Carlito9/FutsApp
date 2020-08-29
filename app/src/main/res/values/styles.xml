@@ -9,16 +9,15 @@
 
     </style>
 
+    <style name="Audiowide" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/audiowide</item>
+    </style>
 
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">@color/azzurro</item>
         <item name="android:fontFamily">@font/bungee_inline</item>
-    </style>
-    <style name="TextStyleBNV">
-            <item name="android:textSize">20sp</item>
-            <item name="android:padding">0dp</item>
-            <item name="textAllCaps">true</item>
+
     </style>
 
     <style name="Theme.ToogleTheme" parent="Theme.AppCompat.Light">
@@ -26,7 +25,7 @@
         <item name="colorControlActivated">#46bdbf</item>
 
         <!-- inactive thumb color -->
-        <item name="colorSwitchThumbNormal">#f1f1f1
+        <item name="colorSwitchThumbNormal">@color/c3
         </item>
 
         <!-- inactive track color (30% transparency) -->
@@ -34,15 +33,5 @@
         </item>
     </style>
 
-    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/roboto_slab</item>
-    </style>
 
-    <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">@font/roboto_slab</item>
-    </style>
-
-    <style name="RobotoEditTextStyle" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">@font/roboto_slab</item>
-    </style>
 </resources>

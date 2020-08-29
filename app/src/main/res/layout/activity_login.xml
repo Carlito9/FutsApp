@@ -18,42 +18,36 @@
         android:textAlignment="center"
         android:textColor="@color/c1"
         android:textSize="50sp" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
 
-        android:layout_marginTop="50dp">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:background="@drawable/border_text"
             android:id="@+id/text_email"
-            android:textColor="#000000"
+            android:fontFamily="@font/audiowide"
+            android:hint="@string/email"
+            android:textColor="@color/blu_scuro"
             android:inputType="textEmailAddress"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-
-        android:layout_marginTop="10dp">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_password"
-            android:textColor="#000000"
+            android:hint="@string/password"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blu_scuro"
             android:background="@drawable/border_text"
+            android:fontFamily="@font/audiowide"
             android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/bLogin"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/border_button"
+        android:fontFamily="@font/audiowide"
         android:text="@string/login"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -75,12 +69,13 @@
 
         />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:id="@+id/button_reg"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@drawable/border_button"
         android:textColor="@color/azzurro"
+        android:fontFamily="@font/audiowide"
         android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"

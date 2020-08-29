@@ -30,7 +30,8 @@
             android:textAlignment="center"
             android:textColor="#094ba3"
             android:layout_marginHorizontal="10dp"
-            android:textSize="20sp" />
+            android:fontFamily="@font/audiowide"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/Orario"
@@ -40,7 +41,8 @@
             android:textColor="#094ba3"
             android:layout_marginHorizontal="10dp"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:fontFamily="@font/audiowide"
             android:background="@drawable/border_text"/>
 
     </LinearLayout>
@@ -51,12 +53,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:hint="Luogo"
+        android:fontFamily="@font/audiowide"
         android:layout_marginTop="15dp"
         android:textColor="#094ba3"
         android:layout_marginBottom="10dp"
         android:background="@drawable/border_text"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_below="@id/DataOra"/>
 
 

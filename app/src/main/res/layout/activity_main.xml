@@ -19,9 +19,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bkg_2"
+        android:background="#fffacd"
+        app:contentInsetStart="20dp"
         app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
     
     <FrameLayout
         android:layout_width="match_parent"
@@ -32,10 +33,13 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
+            style="@style/Widget.Design.BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bkg_2"
+            android:background="#fffacd"
+            app:itemTextAppearanceActive="@style/Audiowide"
+            app:itemTextAppearanceInactive="@style/Audiowide"
             app:menu="@menu/menu" />
 
 
@@ -45,9 +49,10 @@
         android:layout_height="match_parent"
         android:id="@+id/navigationView"
         app:menu="@menu/menu_item"
+        app:itemTextAppearance="@style/Audiowide"
         app:headerLayout="@layout/header"
         android:background="@color/azzurro"
-        android:layout_gravity='start'
+        android:layout_gravity="start"
         app:itemTextColor="@color/c1" />
 
 

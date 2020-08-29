@@ -4,10 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -16,7 +15,8 @@
         android:roundIcon="@mipmap/logo_futsapp2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main.Home.Classifiche.Classifiche"></activity>
+        <activity android:name=".Main.About"></activity>
+        <activity android:name=".Main.Home.Classifiche.Classifiche" />
         <activity android:name=".Main.Home.InserisciRisultato.InserisciRisultato" />
         <activity android:name=".Main.Home.Storico.Storico" />
         <activity android:name=".SplashActivity">

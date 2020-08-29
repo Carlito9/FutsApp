@@ -23,14 +23,14 @@ import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>{
+public class ListaSearch extends  RecyclerView.Adapter<ListaSearch.ViewHolder>{
     private DataList[] listdata;
-    Context context;
+    private Context context;
     private Dialog myDialog;
 
 
     // RecyclerView recyclerView;
-    public ListaRubrica(DataList[] listdata,Context context) {
+    public ListaSearch(DataList[] listdata, Context context) {
         this.listdata = listdata;
         this.context=context;
         myDialog=new Dialog(context);
@@ -38,15 +38,15 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
 
     @NonNull
     @Override
-    public ListaRubrica.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListaSearch.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.fragment_rubrica_item, parent, false);
-        ListaRubrica.ViewHolder viewHolder = new ListaRubrica.ViewHolder(listItem);
+        View listItem = layoutInflater.inflate(R.layout.fragment_search_item, parent, false);
+        ListaSearch.ViewHolder viewHolder = new ListaSearch.ViewHolder(listItem);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final ListaRubrica.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ListaSearch.ViewHolder holder, final int position) {
         final DataList lista = listdata[position];
         myDialog.setContentView(R.layout.popup_giocatore);
 
@@ -116,7 +116,6 @@ public class ListaRubrica extends  RecyclerView.Adapter<ListaRubrica.ViewHolder>
     public int getItemCount() {
         return listdata.length;
     }
-
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView username;

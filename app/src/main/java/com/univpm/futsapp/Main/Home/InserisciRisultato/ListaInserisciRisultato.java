@@ -34,7 +34,7 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
     @Override
     public ListaInserisciRisultato.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.fragment_storico_item, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.inserisci_risultato_item, parent, false);
 
         ListaInserisciRisultato.ViewHolder viewHolder = new ListaInserisciRisultato.ViewHolder(listItem);
         return viewHolder;
@@ -44,7 +44,6 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
     public void onBindViewHolder(@NonNull final ListaInserisciRisultato.ViewHolder holder, final int position) {
         final Matchlist lista = listdata[position];
         myDialog.setContentView(R.layout.popup_inserisci);
-        holder.capo.setText(String.format("organizzatore: %s", lista.getTeams().get(0)));
         holder.data.setText(String.valueOf(lista.getData()));
         holder.luogo.setText(String.valueOf(lista.getLuogo()));
         holder.orario.setText(String.valueOf(lista.getOrario()));
@@ -131,14 +130,12 @@ public class ListaInserisciRisultato extends RecyclerView.Adapter<ListaInserisci
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView capo;
         TextView luogo;
         TextView data;
         TextView orario;
         LinearLayout cardView;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.capo = (TextView) itemView.findViewById(R.id.capo);
             this.data = (TextView) itemView.findViewById(R.id.Data);
             this.luogo = (TextView) itemView.findViewById(R.id.Luogo);
             this.orario = (TextView) itemView.findViewById(R.id.Orario);

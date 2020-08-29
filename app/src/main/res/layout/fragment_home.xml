@@ -97,13 +97,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
             android:background="@drawable/button_storico"
             android:fontFamily="@font/bungee_inline"
             android:text="Nessun Risultato da inserire"
             android:textColor="@color/azzurro"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
 
         <Button
@@ -111,14 +111,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
             android:background="@drawable/button_storico"
             android:fontFamily="@font/bungee_inline"
 
             android:text="Storico"
             android:textColor="@color/azzurro"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
 
     </LinearLayout>
@@ -136,14 +136,14 @@
             android:id="@+id/bNuovaPartita"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
             android:background="@drawable/button_storico"
             android:fontFamily="@font/bungee_inline"
             android:layout_weight="1"
             android:text="nuova partita"
             android:textColor="@color/azzurro"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
 
         <Button
@@ -151,14 +151,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginHorizontal="20dp"
             android:background="@drawable/button_storico"
             android:fontFamily="@font/bungee_inline"
             android:text="Classifiche"
             android:textColor="@color/azzurro"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
     </LinearLayout>
 

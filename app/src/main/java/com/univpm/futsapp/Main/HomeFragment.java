@@ -49,11 +49,12 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.bNuovaPartita).setOnClickListener(nav);
         view.findViewById(R.id.UltimoEvento).setOnClickListener(nav);
         InserisciRis=view.findViewById(R.id.bInserisci);
-        golCasa=view.findViewById(R.id.golCasa);
+
         try {
-            String golC = MainActivity.giocate[MainActivity.giocate.length - 1].getgolCasa();
+            golCasa=view.findViewById(R.id.golCasa);
+            String golC = MainActivity.giocate[0].getgolCasa();
             golCasa.setText(golC);
-            String golO = MainActivity.giocate[MainActivity.giocate.length - 1].getgolOspite();
+            String golO = MainActivity.giocate[0].getgolOspite();
             golOspite = view.findViewById(R.id.golOspite);
             golOspite.setText(golO);
         }catch (NullPointerException e)
@@ -85,12 +86,12 @@ public class HomeFragment extends Fragment {
             }
 
             if (MainActivity.daRegistrare.length != 1)
-                InserisciRis.setText("Hai " + MainActivity.daRegistrare.length + " risultati da inserire");
+                InserisciRis.setText(MainActivity.daRegistrare.length + " risultati da inserire");
             else
-                InserisciRis.setText("Hai " + MainActivity.daRegistrare.length + " risultato da inserire");
+                InserisciRis.setText(MainActivity.daRegistrare.length + " risultato da inserire");
         }
         catch (NullPointerException e){
-            InserisciRis.setText("Hai 0 risultati da inserire");
+            InserisciRis.setText("0 risultati da inserire");
             return false;
         }
         return a;

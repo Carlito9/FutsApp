@@ -65,8 +65,6 @@ public class NewGameActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_new_game);
         teamA[0]= MainActivity.username;
 
-
-
         Luogo=(EditText)findViewById(R.id.Luogo);
         Data=(TextView)findViewById(R.id.Data);
 
@@ -114,6 +112,7 @@ public class NewGameActivity extends AppCompatActivity   {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                             h=hourOfDay;
                             min=minute;
+                            Orario.setText(h+":"+min);
                     }
                 },h,min , true);
                 timePickerDialog.show();
@@ -147,15 +146,14 @@ public class NewGameActivity extends AppCompatActivity   {
     }
 
 
-
     public void save(View view){
         Map<String, Object> partita = new HashMap<>();
-        try{
-        int costo = Integer.parseInt(Costo.getText().toString().trim());
+        String luogo="";
+       try{
+
         //String data = Data.getText().toString().trim();
-        String luogo = Luogo.getText().toString().trim();
-        time= (String) Orario.getText();
-        partita.put("costo",costo);
+        luogo = Luogo.getText().toString().trim();
+        time=  Orario.getText().toString().trim();
         partita.put("luogo",luogo);
         //partita.put("data", day+"-"+(month+1)+"-"+y)
         partita.put("data", y*10000+(month+1)*100+day);

@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.univpm.futsapp.Profile;
 import com.univpm.futsapp.R;
+import com.univpm.futsapp.SplashActivity;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.loginRegistration.LoginActivity;
 import com.univpm.futsapp.utilities.data.DataLoad;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     View headerView;
+    ImageView profilePic;
     ActionBarDrawerToggle toogle;
     String email="nessuna";
     public static SharedPreferences preferences;
@@ -56,20 +58,21 @@ public class MainActivity extends AppCompatActivity {
     public static Matchlist[] daFare;
     public static Matchlist[] giocate;
     public static Matchlist[] daRegistrare;
+    public static DataList user;
     public static DataLoad LoadImage=new DataLoad();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //riempie array giocatori
-        aggiorna();
-        check=true;
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment(this)).commit();
         }
+        aggiorna();
+        check=true;
         bottomNavigationView.setSelectedItemId(R.id.house);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -104,9 +107,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toogle);
         toogle.syncState();
 
-        ImageView profilePic=headerView.findViewById(R.id.profilePic);
-        try {LoadImage.LoadImage(username,profilePic); }
-        catch (IOException e) {e.printStackTrace();}
+        profilePic=headerView.findViewById(R.id.profilePic);
+
 
     }
 
@@ -123,17 +125,23 @@ public class MainActivity extends AppCompatActivity {
                 editor.putBoolean("firstrun", false);
                 editor.putString("user",username);
                 editor.apply();
+                Intent intent= new Intent(MainActivity.this, SplashActivity.class);
+                startActivity(intent);
             }
             else if(resultCode== RESULT_CANCELED)
                 finish();
         }
+
     }
 
 
 @Override
     protected void onResume() {
         super.onResume();
-        if(email.equals("nessuna")) {//FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        if(email.equals("nessuna") && !preferences.getBoolean("firstrun", true)) {
+            System.out.println("resuuuuuume");
+            //FirebaseFirestore db = FirebaseFirestore.getInstance();
             //mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
             username = currentUser.getDisplayName();
@@ -142,39 +150,52 @@ public class MainActivity extends AppCompatActivity {
             slotUsername.setText(username);
             TextView slotEmail = (TextView) headerView.findViewById(R.id.slotEmail);
             slotEmail.setText(email);
+            try {LoadImage.LoadImage(username,profilePic); }
+            catch (IOException e) {e.printStackTrace();}
         }
     }
 
 
     public void onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.profile:
+            case R.id.profile: {
                 Intent intent = new Intent(MainActivity.this, Profile.class);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, "Profile Selected", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.contact:
-                Toast.makeText(MainActivity.this, "Contact us Selected", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.about:
+                break;}
+            case R.id.about: {
                 Toast.makeText(MainActivity.this, "About us Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, About.class);
+                startActivity(intent);
                 break;
+            }
             case R.id.logout: {
-                SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("firstrun", true);
-                editor.apply();
-                apriLogin();
+                logout();
             }
             break;
         }
+    }
 
+    private void logout() {
+        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("firstrun", true);
+        editor.apply();
+        apriLogin();
     }
 
     void apriLogin (){
+
         if (preferences.getBoolean("firstrun", true)) {
             Intent launchLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(launchLogin, LOGIN_REQUEST);
+        }
+        else {
+            try {
+                LoadImage.LoadImage(username, profilePic);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -197,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                         } else
                             check = false;
                     } catch (Exception e) {
-                        System.out.println("");
+                       e.printStackTrace();
                     }
                 }
             }

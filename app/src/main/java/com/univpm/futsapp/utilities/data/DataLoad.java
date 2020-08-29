@@ -8,6 +8,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,7 +23,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.univpm.futsapp.GlideApp;
 import com.univpm.futsapp.Main.MainActivity;
+import com.univpm.futsapp.R;
 import com.univpm.futsapp.SplashActivity;
 import com.univpm.futsapp.Viewed;
 import com.univpm.futsapp.utilities.listForAdapter.Matchlist;
@@ -27,6 +34,7 @@ import com.univpm.futsapp.Main.Home.NewGame.NewGameActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -65,7 +73,8 @@ public class DataLoad {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
                                                 DataList a=new DataList((String)document.getData().get("username"),document.getData());
                                                 lista.add(a);
-
+                                                if(document.getData().get("username").equals(MainActivity.username))
+                                                    MainActivity.user=a;
                                             }
                                         } else {
                                             System.out.println("Error getting documents: " + task.getException());
@@ -95,6 +104,8 @@ public class DataLoad {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 DataList a=new DataList((String)document.getData().get("username"),document.getData());
                                 lista.add(a);
+                                if(document.getData().get("username").equals(MainActivity.username))
+                                    MainActivity.user=a;
 
                             }
                         } else {
@@ -140,9 +151,11 @@ public class DataLoad {
                                 } else {
                                     System.out.println("Error getting documents: " + task.getException());
                                 }
+
                                 MainActivity.daFare= dafare.toArray(new Matchlist[0]);
                                 MainActivity.giocate= giocate.toArray(new Matchlist[0]);
                                 MainActivity.daRegistrare= daregistrare.toArray(new Matchlist[0]);
+                                Ordina();
                                 if(conta==1)
                                 {
                                     con.startActivity(intent);
@@ -155,6 +168,9 @@ public class DataLoad {
 
 
     }
+
+
+
 
     public void LoadMatch(final String user) {
 
@@ -199,16 +215,20 @@ public class DataLoad {
     }
 
     public void LoadImage(final String user, final ImageView img) throws IOException {
-        for(Viewed v:viewed) {
+        /*for(Viewed v:viewed) {
             if (v.getNome().equals(user)) {
                 img.setImageURI(v.getUri());
                 return;
             }
-        }
+        }*/
 
-            final File localFile = File.createTempFile(user, ".jpg");
+            //final File localFile = File.createTempFile(user, ".jpg");
             StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("images/" + user);
-            storageRef.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+            Glide.with(img.getContext())
+                    .load(storageRef)
+                    .placeholder(R.drawable.utente)
+                    .into(img);
+            /*storageRef.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
                     if (task.isSuccessful()) {
@@ -218,7 +238,7 @@ public class DataLoad {
                         viewed.add(v);
                     }
                 }
-            });
+            });*/
     }
 
     private void CaricaAmici(String user)
@@ -251,6 +271,18 @@ public class DataLoad {
         int mese=(data-giorno)/100%100;
         int anno=(data-(mese*100)-giorno)/10000%10000;
         return giorno+"-"+mese+"-"+anno;
+    }
+
+    private void Ordina() {
+        Matchlist m;
+        int i=0;
+        while(i<(MainActivity.giocate.length-1-i))
+        {
+            m=MainActivity.giocate[i];
+            MainActivity.giocate[i]=MainActivity.giocate[MainActivity.giocate.length-1-i];
+            MainActivity.giocate[MainActivity.giocate.length-1-i]=m;
+            i++;
+        }
     }
 
 }

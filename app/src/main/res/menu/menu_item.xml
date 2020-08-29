@@ -5,10 +5,6 @@
         android:title="Profile"
         android:onClick="onNavigationItemSelected"/>
     <item
-        android:id="@+id/contact"
-        android:title="Contact us"
-        android:onClick="onNavigationItemSelected"/>
-    <item
         android:id="@+id/about"
         android:title="About us"
         android:onClick="onNavigationItemSelected"/>

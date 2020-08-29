@@ -4,7 +4,10 @@ package com.univpm.futsapp.loginRegistration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +20,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.univpm.futsapp.R;
 
 import java.util.ArrayList;
@@ -30,6 +36,7 @@ public class Register extends AppCompatActivity {
     private TextInputEditText textUser, textEmail, textPassword;
     private Button btnRegistra;
     private FirebaseAuth mAuth;
+    private Dialog myDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-
+        myDialog=new Dialog(this);
         textUser = findViewById(R.id.text_user);
         textEmail = findViewById(R.id.text_email);
         textPassword = findViewById(R.id.text_password);
@@ -45,42 +52,80 @@ public class Register extends AppCompatActivity {
         btnRegistra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myDialog.setContentView(R.layout.popup_loading);
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.show();
+                int error=0;
+                try {
+                    final String username = textUser.getText().toString();
+                    if (username.length()<11)
+                        error=1;
+                    final String email = textEmail.getText().toString();
+                    if(!email.contains("@"))
+                        error=2;
+                    final String password = textPassword.getText().toString();
+                    if(password.length()<6)
+                        error=3;
 
-                try{
-                    final String username=textUser.getText().toString();
-                    String email = textEmail.getText().toString();
-                    String password = textPassword.getText().toString();
-                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
-                                final FirebaseUser user=mAuth.getCurrentUser();
+                    CreateUser(username, email, password);
 
-                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(username)
-                                        .build();
-                                user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        InsertUser(username,user);
-
-                                    }
-                                });
-                            }else
-                            {
-                                Toast.makeText(Register.this,"Fallito",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                }
-                catch (IllegalArgumentException e){
-                Toast.makeText(Register.this, "Riempire tutti i campi per favore",Toast.LENGTH_SHORT).show();
+                } catch (IllegalArgumentException e) {
+                    myDialog.dismiss();
+                    if (error==1)
+                        Toast.makeText(Register.this, "username troppo lungo", Toast.LENGTH_SHORT).show();
+                    if (error==2)
+                        Toast.makeText(Register.this, "email non esistente", Toast.LENGTH_SHORT).show();
+                    if (error==3)
+                        Toast.makeText(Register.this, "password troppo breve", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Riempire tutti i campi per favore", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
+
+
+        private void CreateUser(final String username, String email, String password){
+            Thread aspetta = new Thread() {
+                public void run() {
+                    try {
+                        sleep(15 * 1000);
+                        if(myDialog.isShowing()) {
+                            myDialog.dismiss();
+                            Intent intent = new Intent();
+                            setResult(RESULT_CANCELED, intent);
+                            finish();
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Problema nel salvataggio");
+                        e.printStackTrace();
+                    }
+                }
+            };
+            aspetta.start();
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        final FirebaseUser user = mAuth.getCurrentUser();
+                        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(username)
+                                .build();
+                        user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                InsertUser(username, user);
+
+                            }
+                        });
+                    } else {
+                        Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
+                        myDialog.dismiss();
+                    }
+                }
+            });
+        }
+
+
     private void InsertUser(String username, final FirebaseUser utente) {
         final Map<String, Object> user = new HashMap<>();
         user.put("username", username);
@@ -103,13 +148,17 @@ public class Register extends AppCompatActivity {
                                 Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
                                 finish();
+                                myDialog.dismiss();
                             } else {
                                 Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
                                 utente.delete();
-
+                                myDialog.dismiss();
                             }
                         }
                     });
-        } else Toast.makeText(Register.this, "Nome già esistente", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(Register.this, "Nome già esistente", Toast.LENGTH_SHORT).show();
+            myDialog.dismiss();
+        }
     }
 }

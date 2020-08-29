@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.univpm.futsapp.Main.Search.ListaRubrica;
+import com.univpm.futsapp.Main.Search.ListaSearch;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 import com.univpm.futsapp.R;
 
@@ -51,7 +51,7 @@ public class FragmentSearch extends Fragment {
     private void Crearecycle(DataList[] players) {
         giocatori.setHasFixedSize(true);
         RecyclerView.LayoutManager lManager = new LinearLayoutManager(view.getContext());
-        RecyclerView.Adapter mAdapter = new ListaRubrica(players,view.getContext());
+        RecyclerView.Adapter mAdapter = new ListaSearch(players,view.getContext());
         giocatori.setAdapter(mAdapter);
         giocatori.setLayoutManager(lManager);
     }

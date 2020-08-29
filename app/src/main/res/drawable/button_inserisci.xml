@@ -5,7 +5,7 @@
 
     <stroke
         android:color="#f0ffff"
-        android:width="6dp"
+        android:width="4dp"
         />
     <gradient
         android:startColor="#ff4500"
