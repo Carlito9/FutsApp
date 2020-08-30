@@ -65,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //riempie array giocatori
+        navigationView = findViewById(R.id.navigationView);
+        headerView = navigationView.getHeaderView(0);
+        profilePic=headerView.findViewById(R.id.profilePic);
+        System.out.println("ciao bonus");
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -99,15 +103,15 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
-        navigationView = findViewById(R.id.navigationView);
-        headerView = navigationView.getHeaderView(0);
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toogle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toogle);
         toogle.syncState();
 
-        profilePic=headerView.findViewById(R.id.profilePic);
+
 
 
     }
@@ -118,19 +122,17 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == LOGIN_REQUEST) {
             if (resultCode == RESULT_OK)
             {
+                System.out.println("ciao8");
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 username=currentUser.getDisplayName();
-                SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("firstrun", false);
-                editor.putString("user",username);
-                editor.apply();
                 Intent intent= new Intent(MainActivity.this, SplashActivity.class);
                 startActivity(intent);
             }
             else if(resultCode== RESULT_CANCELED)
                 finish();
         }
+
+
 
     }
 

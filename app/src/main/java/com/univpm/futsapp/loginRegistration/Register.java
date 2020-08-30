@@ -88,11 +88,11 @@ public class Register extends AppCompatActivity {
             Thread aspetta = new Thread() {
                 public void run() {
                     try {
-                        sleep(15 * 1000);
+                        sleep(20 * 1000);
                         if(myDialog.isShowing()) {
                             myDialog.dismiss();
-                            Intent intent = new Intent();
-                            setResult(RESULT_CANCELED, intent);
+                            Intent i = new Intent();
+                            setResult(RESULT_CANCELED, i);
                             finish();
                         }
                     } catch (Exception e) {
@@ -102,6 +102,7 @@ public class Register extends AppCompatActivity {
                 }
             };
             aspetta.start();
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -114,6 +115,7 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 InsertUser(username, user);
+
 
                             }
                         });
@@ -136,7 +138,6 @@ public class Register extends AppCompatActivity {
         user.put("gol fatti", 0);
         user.put("amici", Arrays.asList(username));
 
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (!db.collection("utenti").document(username).get().isSuccessful()) {
             db.collection("utenti").document(username).set(user)
@@ -144,11 +145,12 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
+
                                 Toast.makeText(Register.this, "Registrazione completata", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
-                                finish();
                                 myDialog.dismiss();
+                                finish();
                             } else {
                                 Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
                                 utente.delete();
@@ -160,5 +162,13 @@ public class Register extends AppCompatActivity {
             Toast.makeText(Register.this, "Nome già esistente", Toast.LENGTH_SHORT).show();
             myDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent =new Intent();
+        setResult(5,intent);
+        finish();
     }
 }

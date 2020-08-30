@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
             String golO = MainActivity.giocate[0].getgolOspite();
             golOspite = view.findViewById(R.id.golOspite);
             golOspite.setText(golO);
-        }catch (NullPointerException e)
+        }catch (NullPointerException | ArrayIndexOutOfBoundsException e)
         {
             view.findViewById(R.id.risultato).setVisibility(View.GONE);
             view.findViewById(R.id.ultima).setVisibility(View.GONE);
