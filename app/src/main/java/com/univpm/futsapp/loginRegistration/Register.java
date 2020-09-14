@@ -37,12 +37,12 @@ public class Register extends AppCompatActivity {
     private Button btnRegistra;
     private FirebaseAuth mAuth;
     private Dialog myDialog;
-
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         myDialog=new Dialog(this);
         textUser = findViewById(R.id.text_user);
@@ -84,7 +84,7 @@ public class Register extends AppCompatActivity {
     }
 
 
-        private void CreateUser(final String username, String email, String password){
+        private void CreateUser(final String username, final String email, final String password){
             Thread aspetta = new Thread() {
                 public void run() {
                     try {
@@ -102,29 +102,49 @@ public class Register extends AppCompatActivity {
                 }
             };
             aspetta.start();
+            db.collection("utenti").whereEqualTo("username",username).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful())
+                            {
+                                if(task.getResult().isEmpty())
+                                {
+                                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                final FirebaseUser user = mAuth.getCurrentUser();
+                                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                                        .setDisplayName(username)
+                                                        .build();
+                                                user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        InsertUser(username, user);
 
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        final FirebaseUser user = mAuth.getCurrentUser();
-                        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(username)
-                                .build();
-                        user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                InsertUser(username, user);
 
-
+                                                    }
+                                                });
+                                            } else {
+                                                Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
+                                                myDialog.dismiss();
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                    Toast.makeText(Register.this, "Nome già esistente", Toast.LENGTH_SHORT).show();
+                                    myDialog.dismiss();
+                                }
                             }
-                        });
-                    } else {
-                        Toast.makeText(Register.this, "Fallito", Toast.LENGTH_SHORT).show();
-                        myDialog.dismiss();
-                    }
-                }
-            });
+                            else {
+                                Toast.makeText(Register.this, "Problema nella creazione utente", Toast.LENGTH_SHORT).show();
+                                myDialog.dismiss();
+                            }
+                        }
+                    });
+
         }
 
 
@@ -138,16 +158,15 @@ public class Register extends AppCompatActivity {
         user.put("gol fatti", 0);
         user.put("amici", Arrays.asList(username));
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        if (!db.collection("utenti").document(username).get().isSuccessful()) {
+
+
             db.collection("utenti").document(username).set(user)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
 
-                                Toast.makeText(Register.this, "Registrazione completata", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent();
+                                 Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
                                 myDialog.dismiss();
                                 finish();
@@ -158,17 +177,13 @@ public class Register extends AppCompatActivity {
                             }
                         }
                     });
-        } else {
-            Toast.makeText(Register.this, "Nome già esistente", Toast.LENGTH_SHORT).show();
-            myDialog.dismiss();
-        }
+
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent intent =new Intent();
-        setResult(5,intent);
+        setResult(RESULT_FIRST_USER,intent);
         finish();
     }
 }

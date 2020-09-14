@@ -86,7 +86,10 @@ public class NewGameActivity extends AppCompatActivity   {
         min=mCurrentDate.get(Calendar.MINUTE);
 
         Data.setHint(day+"/"+(month+1)+"/"+y);
-        Orario.setHint(h+":"+min);
+        if(min<10)
+            Orario.setHint(h+":0"+min);
+        else
+            Orario.setHint(h+":"+min);
         Data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

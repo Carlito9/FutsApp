@@ -28,4 +28,7 @@ public class InserisciRisultato extends AppCompatActivity {
         insRis.setAdapter(mAdapter);
         insRis.setLayoutManager(lManager);
     }
+    public void close(){
+        finish();
+    }
 }

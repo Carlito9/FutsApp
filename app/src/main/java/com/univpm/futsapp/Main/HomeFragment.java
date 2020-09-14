@@ -86,12 +86,20 @@ public class HomeFragment extends Fragment {
             }
 
             if (MainActivity.daRegistrare.length != 1)
+            {
                 InserisciRis.setText(MainActivity.daRegistrare.length + " risultati da inserire");
-            else
+                InserisciRis.setBackgroundResource(R.drawable.button_storico);
+                InserisciRis.setTextColor(getResources().getColor(R.color.azzurro, null));
+            }
+
+            else {
                 InserisciRis.setText(MainActivity.daRegistrare.length + " risultato da inserire");
+            }
         }
         catch (NullPointerException e){
             InserisciRis.setText("0 risultati da inserire");
+            InserisciRis.setBackgroundResource(R.drawable.button_storico);
+            InserisciRis.setTextColor(getResources().getColor(R.color.azzurro, null));
             return false;
         }
         return a;
@@ -106,20 +114,20 @@ public class HomeFragment extends Fragment {
                 if(verifica)
                 {
                     MainActivity.check=true;
-                    show("visualizzo i gruppi");
+
                     openInsert();
                 }
                 break;
             case R.id.bStorico: {
-                show("visualizzo lo storico");
+
                 openHistory();
                 break;}
             case R.id.bClassifiche: {
-                show("open social");
+
                 openClassifica();
                 break;}
             case R.id.bNuovaPartita: {
-                show("creiamo una nuova partita");
+
                 MainActivity.check=true;
                 openNewGame();
                 break;}

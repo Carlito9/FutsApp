@@ -56,15 +56,18 @@ public class DataSave {
                     {
                         Carica();
                         SavePlayer(golgioc,teams,segno);
+                        final Dialog caricamento=new Dialog(myDialog.getContext());
+                        caricamento.setContentView(R.layout.popup_loading);
+                        caricamento.show();
                         Thread backg = new Thread() {
-                            Dialog caricamento=new Dialog(myDialog.getContext());
+
                             public void run() {
-                                caricamento.setContentView(R.layout.popup_loading);
-                                caricamento.show();
+
                                 try {sleep(3*1000);
                                     caricamento.dismiss();
                                     myDialog.dismiss();
-                                    new InserisciRisultato().CreaFragment();
+
+                                    new InserisciRisultato().close();
                                 } catch (Exception e) {System.out.println("Problema nel salvataggio");
                                     e.printStackTrace();
                                 }

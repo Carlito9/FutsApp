@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
@@ -60,6 +61,7 @@ public class ChoosePlayer extends AppCompatActivity {
             Intent intent=new Intent();
             String[] partecipanti= chosen.toArray(new String[0]);
             intent.putExtra("partecipanti",partecipanti);
+
             setResult(RESULT_OK, intent);
             finish();
 

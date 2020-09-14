@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.univpm.futsapp.Main.MainActivity;
 import com.univpm.futsapp.R;
 import com.univpm.futsapp.utilities.listForAdapter.DataList;
 
@@ -54,15 +55,15 @@ public class ListaGiocatori extends RecyclerView.Adapter<ListaGiocatori.ViewHold
         holder.username.setText(lista.getUsername());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (!chosen.contains(lista.getUsername())){
+            public void onClick(View view) {if(!(lista.getUsername().equals(MainActivity.username))) {
+                if (!chosen.contains(lista.getUsername())) {
                     holder.relativeLayout.setBackgroundResource(R.drawable.border_choose_clicked);
                     chosen.add(lista.getUsername());
-                }
-                else {
+                } else {
                     holder.relativeLayout.setBackgroundResource(R.drawable.border_choose_default);
                     chosen.remove(lista.getUsername());
                 }
+            }
             }
         });
     }

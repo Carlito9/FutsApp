@@ -207,7 +207,7 @@ public class DataLoad {
                 MainActivity.daFare= dafare.toArray(new Matchlist[0]);
                 MainActivity.giocate= giocate.toArray(new Matchlist[0]);
                 MainActivity.daRegistrare= daregistrare.toArray(new Matchlist[0]);
-
+                Ordina();
             }
         });
 

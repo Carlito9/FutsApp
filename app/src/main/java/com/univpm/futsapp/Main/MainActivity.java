@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         headerView = navigationView.getHeaderView(0);
         profilePic=headerView.findViewById(R.id.profilePic);
-        System.out.println("ciao bonus");
+
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         apriLogin();
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == LOGIN_REQUEST) {
             if (resultCode == RESULT_OK)
             {
-                System.out.println("ciao8");
+
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 username=currentUser.getDisplayName();
                 Intent intent= new Intent(MainActivity.this, SplashActivity.class);
@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if(email.equals("nessuna") && !preferences.getBoolean("firstrun", true)) {
-            System.out.println("resuuuuuume");
             //FirebaseFirestore db = FirebaseFirestore.getInstance();
             //mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();

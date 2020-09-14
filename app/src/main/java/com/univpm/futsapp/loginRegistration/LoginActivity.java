@@ -45,13 +45,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Successfully Logged In", Toast.LENGTH_LONG).show();
                             aggiornaUser();
                             Intent intent = new Intent();
                             setResult(RESULT_OK, intent);
                             finish();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Login Fallito", Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -92,6 +91,8 @@ public class LoginActivity extends AppCompatActivity {
             else if (RESULT_CANCELED==resultCode)
             {Toast.makeText(LoginActivity.this, "Connessione debole o assente", Toast.LENGTH_SHORT).show();
                 lanciaReg();}
+            else if(RESULT_FIRST_USER==resultCode)
+            {}
         }
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.univpm.futsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,33 +10,44 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/logo_futsapp2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo_futsapp2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main.About"></activity>
-        <activity android:name=".Main.Home.Classifiche.Classifiche" />
-        <activity android:name=".Main.Home.InserisciRisultato.InserisciRisultato" />
-        <activity android:name=".Main.Home.Storico.Storico" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Main.About" ></activity>
+        <activity android:name=".Main.Home.Classifiche.Classifiche" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".Main.Home.InserisciRisultato.InserisciRisultato" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".Main.Home.Storico.Storico" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".SplashActivity" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main.Home.NewGame.ChoosePlayer" />
-        <activity android:name=".loginRegistration.Register" />
-        <activity android:name=".loginRegistration.LoginActivity" />
-        <activity android:name=".Main.Home.NewGame.NewGameActivity" />
-        <activity android:name=".Main.MainActivity">
+        <activity android:name=".Main.Home.NewGame.ChoosePlayer" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".loginRegistration.Register" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".loginRegistration.LoginActivity" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".Main.Home.NewGame.NewGameActivity" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".Main.MainActivity" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile" android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

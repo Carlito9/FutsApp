@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginVertical="10dp"
-                android:layout_marginEnd="7dp"
+                android:layout_marginEnd="11dp"
                 android:fontFamily="@font/audiowide"
                 android:text="gol"
                 android:textAlignment="textEnd"
@@ -113,7 +113,7 @@
 
                     <TextView
                         android:id="@+id/playerA0"
-                        android:layout_width="135dp"
+                        android:layout_width="match_parent"
                         android:layout_height="36dp"
                         android:fontFamily="@font/audiowide"
                         android:paddingTop="10dp"
@@ -310,7 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginVertical="10dp"
-                android:layout_marginEnd="17dp"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/audiowide"
                 android:text="gol"
                 android:textAlignment="textEnd"
